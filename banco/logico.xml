@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <MER>
 	<Informacoes>
-		<Posicao Left="0" Top="55"/>
-		<TotalItens Valor="355"/>
+		<Posicao Left="304" Top="110"/>
+		<TotalItens Valor="356"/>
 		<Tipo Valor="LOGICO"/>
 		<Versao Valor="1.0.1"/>
 		<Autor Valor=""/>
@@ -299,7 +299,7 @@
       <Left Valor="618"/>
       <Top Valor="321"/>
       <Width Valor="134"/>
-      <Height Valor="208"/>
+      <Height Valor="226"/>
       <Fonte default="-1"/>
       <Dicionario></Dicionario>
       <Nula Valor="0"/>
@@ -323,9 +323,25 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="NOME" id="134">
+        <Campo nome="ID_ENDERECO" id="147">
           <Left Valor="618"/>
           <Top Valor="358"/>
+          <Width Valor="132"/>
+          <Height Valor="19"/>
+          <Fonte default="-1"/>
+          <Dicionario></Dicionario>
+          <Nula Valor="-1"/>
+          <Observacao></Observacao>
+          <Anexos/>
+          <ApenasSeparador Valor="0"/>
+          <IsKey Valor="0"/>
+          <IsFKey Valor="-1"/>
+          <Tipo Valor="Inteiro"/>
+          <TabOrigem Valor="0"/>
+        </Campo>
+        <Campo nome="NOME" id="134">
+          <Left Valor="618"/>
+          <Top Valor="376"/>
           <Width Valor="132"/>
           <Height Valor="19"/>
           <Fonte default="-1"/>
@@ -339,23 +355,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="RG" id="135">
-          <Left Valor="618"/>
-          <Top Valor="376"/>
-          <Width Valor="132"/>
-          <Height Valor="19"/>
-          <Fonte default="-1"/>
-          <Dicionario></Dicionario>
-          <Nula Valor="-1"/>
-          <Observacao></Observacao>
-          <Anexos/>
-          <ApenasSeparador Valor="0"/>
-          <IsKey Valor="0"/>
-          <IsFKey Valor="0"/>
-          <Tipo Valor="Inteiro"/>
-          <TabOrigem Valor="0"/>
-        </Campo>
-        <Campo nome="CPF" id="136">
+        <Campo nome="DATA_NASCIMENTO" id="450">
           <Left Valor="618"/>
           <Top Valor="394"/>
           <Width Valor="132"/>
@@ -387,7 +387,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="DATA_NASCIMENTO" id="450">
+        <Campo nome="RG" id="135">
           <Left Valor="618"/>
           <Top Valor="430"/>
           <Width Valor="132"/>
@@ -403,41 +403,9 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="ID_ENDERECO" id="147">
+        <Campo nome="CPF" id="136">
           <Left Valor="618"/>
           <Top Valor="448"/>
-          <Width Valor="132"/>
-          <Height Valor="19"/>
-          <Fonte default="-1"/>
-          <Dicionario></Dicionario>
-          <Nula Valor="-1"/>
-          <Observacao></Observacao>
-          <Anexos/>
-          <ApenasSeparador Valor="0"/>
-          <IsKey Valor="0"/>
-          <IsFKey Valor="-1"/>
-          <Tipo Valor="Inteiro"/>
-          <TabOrigem Valor="0"/>
-        </Campo>
-        <Campo nome="CRO" id="138">
-          <Left Valor="618"/>
-          <Top Valor="466"/>
-          <Width Valor="132"/>
-          <Height Valor="19"/>
-          <Fonte default="-1"/>
-          <Dicionario></Dicionario>
-          <Nula Valor="-1"/>
-          <Observacao></Observacao>
-          <Anexos/>
-          <ApenasSeparador Valor="0"/>
-          <IsKey Valor="0"/>
-          <IsFKey Valor="0"/>
-          <Tipo Valor="Inteiro"/>
-          <TabOrigem Valor="0"/>
-        </Campo>
-        <Campo nome="NUMERO_EXTERNO" id="139">
-          <Left Valor="618"/>
-          <Top Valor="484"/>
           <Width Valor="132"/>
           <Height Valor="19"/>
           <Fonte default="-1"/>
@@ -453,7 +421,55 @@
         </Campo>
         <Campo nome="TELEFONE" id="453">
           <Left Valor="618"/>
+          <Top Valor="466"/>
+          <Width Valor="132"/>
+          <Height Valor="19"/>
+          <Fonte default="-1"/>
+          <Dicionario></Dicionario>
+          <Nula Valor="-1"/>
+          <Observacao></Observacao>
+          <Anexos/>
+          <ApenasSeparador Valor="0"/>
+          <IsKey Valor="0"/>
+          <IsFKey Valor="0"/>
+          <Tipo Valor="Inteiro"/>
+          <TabOrigem Valor="0"/>
+        </Campo>
+        <Campo nome="Email" id="667">
+          <Left Valor="618"/>
+          <Top Valor="484"/>
+          <Width Valor="132"/>
+          <Height Valor="19"/>
+          <Fonte default="-1"/>
+          <Dicionario></Dicionario>
+          <Nula Valor="-1"/>
+          <Observacao></Observacao>
+          <Anexos/>
+          <ApenasSeparador Valor="0"/>
+          <IsKey Valor="0"/>
+          <IsFKey Valor="0"/>
+          <Tipo Valor="Inteiro"/>
+          <TabOrigem Valor="0"/>
+        </Campo>
+        <Campo nome="CRO" id="138">
+          <Left Valor="618"/>
           <Top Valor="502"/>
+          <Width Valor="132"/>
+          <Height Valor="19"/>
+          <Fonte default="-1"/>
+          <Dicionario></Dicionario>
+          <Nula Valor="-1"/>
+          <Observacao></Observacao>
+          <Anexos/>
+          <ApenasSeparador Valor="0"/>
+          <IsKey Valor="0"/>
+          <IsFKey Valor="0"/>
+          <Tipo Valor="Inteiro"/>
+          <TabOrigem Valor="0"/>
+        </Campo>
+        <Campo nome="NUMERO_EXTERNO" id="139">
+          <Left Valor="618"/>
+          <Top Valor="520"/>
           <Width Valor="132"/>
           <Height Valor="19"/>
           <Fonte default="-1"/>
@@ -497,7 +513,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="ID_ENDERECO" id="146">
+        <Campo nome="ID_DISCIPLINA" id="148">
           <Left Valor="693"/>
           <Top Valor="577"/>
           <Width Valor="132"/>
@@ -511,9 +527,9 @@
           <IsKey Valor="0"/>
           <IsFKey Valor="-1"/>
           <Tipo Valor="Inteiro"/>
-          <TabOrigem Valor="112"/>
+          <TabOrigem Valor="10"/>
         </Campo>
-        <Campo nome="ID_DISCIPLINA" id="148">
+        <Campo nome="ID_ENDERECO" id="146">
           <Left Valor="693"/>
           <Top Valor="595"/>
           <Width Valor="132"/>
@@ -527,7 +543,7 @@
           <IsKey Valor="0"/>
           <IsFKey Valor="-1"/>
           <Tipo Valor="Inteiro"/>
-          <TabOrigem Valor="10"/>
+          <TabOrigem Valor="112"/>
         </Campo>
         <Campo nome="NOME" id="149">
           <Left Valor="693"/>
@@ -545,7 +561,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="RG" id="150">
+        <Campo nome="DATA_NASCIMENTO" id="451">
           <Left Valor="693"/>
           <Top Valor="631"/>
           <Width Valor="132"/>
@@ -577,7 +593,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="CPF" id="151">
+        <Campo nome="RG" id="150">
           <Left Valor="693"/>
           <Top Valor="667"/>
           <Width Valor="132"/>
@@ -593,7 +609,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="DATA_NASCIMENTO" id="451">
+        <Campo nome="CPF" id="151">
           <Left Valor="693"/>
           <Top Valor="685"/>
           <Width Valor="132"/>
@@ -609,7 +625,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="EMAIL" id="455">
+        <Campo nome="TELEFONE" id="454">
           <Left Valor="693"/>
           <Top Valor="703"/>
           <Width Valor="132"/>
@@ -625,7 +641,7 @@
           <Tipo Valor="Inteiro"/>
           <TabOrigem Valor="0"/>
         </Campo>
-        <Campo nome="TELEFONE" id="454">
+        <Campo nome="EMAIL" id="455">
           <Left Valor="693"/>
           <Top Valor="721"/>
           <Width Valor="132"/>
@@ -2791,7 +2807,7 @@
           <Cardinalidades Cardinalidade="1">
             <Cardinalidade nome="" id="18">
               <Left Valor="580"/>
-              <Top Valor="375"/>
+              <Top Valor="381"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
@@ -3043,7 +3059,7 @@
           <Cardinalidades Cardinalidade="4">
             <Cardinalidade nome="" id="126">
               <Left Valor="580"/>
-              <Top Valor="444"/>
+              <Top Valor="456"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
@@ -3207,7 +3223,7 @@
           <Cardinalidades Cardinalidade="4">
             <Cardinalidade nome="" id="161">
               <Left Valor="752"/>
-              <Top Valor="410"/>
+              <Top Valor="419"/>
               <Width Valor="40"/>
               <Height Valor="20"/>
               <Fonte default="-1"/>
