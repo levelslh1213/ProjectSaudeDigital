@@ -12,12 +12,12 @@ import Utilitarios.ManipulaData;
  * @author E181
  */
 public class Pessoa {
+    private Endereco endereco;
     private String nome;
+    private String dataNascimento;
+    private String sexo;
     private String rg;
     private String cpf;
-    private String sexo;
-    private String dataNascimento;
-    private Endereco endereco;
     private String telefone;
     private String email;
     
