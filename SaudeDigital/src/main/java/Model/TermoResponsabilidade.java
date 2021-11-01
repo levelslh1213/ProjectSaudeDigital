@@ -11,6 +11,7 @@ package Model;
  */
 public class TermoResponsabilidade {
     private String visualizado;
+    private int idPaciente;
     
     public String getVisualizado() {
         return visualizado;
@@ -19,4 +20,11 @@ public class TermoResponsabilidade {
     public void setVisualizado(String visualizado) {
         this.visualizado = visualizado;
     }    
+    public int getIdPaciente() {
+        return idPaciente;
+    }
+
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
+    }
 }
