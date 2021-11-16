@@ -46,6 +46,11 @@
 			<version>${mockito-core.version}</version>
 			<scope>test</scope>
 		</dependency>
+        <dependency>
+            <groupId>mssql</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>9.4.0</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -5,6 +5,11 @@
  */
 package Model;
 
+import Control.Controller;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author E181
@@ -17,6 +22,15 @@ public class Endereco {
     private String cep;
     private String cidade;
     private String estado;
+    
+    private Connection db;
+    private PreparedStatement statement;
+    private ResultSet result;
+    private String sql;
+    
+    public Endereco() throws ClassNotFoundException{
+        this.db = new Controller().connectDB();
+    }
         
     public String getRua() {
         return rua;
@@ -74,4 +88,50 @@ public class Endereco {
         this.estado = estado;
     }
         
+    public int insertAddressInDB(Endereco endereco) throws ClassNotFoundException{
+        int idEndereco = getNewPrimaryKeyValue();
+        if(idEndereco == 0){
+            return idEndereco;
+        }
+        else{
+            sql = "INSERT INTO ENDERECO(ID_ENDERECO, RUA, NUMERO, BAIRRO, COMPLEMENTO, CEP, CIDADE, ESTADO)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)" ;
+            
+            try {
+                db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setInt(1, idEndereco);
+                statement.setString(2, endereco.getRua());
+                statement.setString(3, endereco.getNumero());
+                statement.setString(4, endereco.getBairro());
+                statement.setString(5, endereco.getComplemento());
+                statement.setString(6, endereco.getCep());
+                statement.setString(7, endereco.getCidade());
+                statement.setString(8, endereco.getEstado());
+                statement.execute();
+                statement.close();
+                
+                return idEndereco;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return 0;
+            }
+        }
+    }
+    
+    private int getNewPrimaryKeyValue() throws ClassNotFoundException{
+        sql = "SELECT NEXT VALUE FOR SEQ_ID_ENDERECO AS ID_ENDERECO";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_ENDERECO");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
 }

@@ -68,10 +68,10 @@ public class Controller {
     public Connection connectDB() throws ClassNotFoundException{
         Connection connect = null;
         
-        String url="jdbc:sqlserver://"+getServidor()+":databaseName="+getBanco()+":user="+getUsuario()+":password="+getSenha();
+        String url="jdbc:sqlserver://"+getServidor()+ ";databaseName="+getBanco()+";user="+getUsuario()+";password="+getSenha();
         
         try {
-            Class.forName("com.microsoft.jdbc.SQLServerDriver");
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connect = DriverManager.getConnection(url);
         } catch (ClassNotFoundException e) {
             out.print(e);
