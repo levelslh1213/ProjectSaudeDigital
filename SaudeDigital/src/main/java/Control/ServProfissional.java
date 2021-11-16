@@ -48,7 +48,8 @@ public class ServProfissional extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
-        getDataInRequest(request);
+        getDataFromRequest(request);
+        
         insertDataInSession(request);
         redirectRequest(request, response, "index.html");
         
@@ -60,14 +61,15 @@ public class ServProfissional extends HttpServlet {
             out.println("<title>Servlet ServReqObrigatorio</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServReqObrigatorio at " + this.idProfissional + "</h1>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + request.getParameter("edtDataNasc") + "</h1><br>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.profissional.getDataNascimento() + "</h1>");
             out.println("<p>"+this.e+"</p>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    private void getDataInRequest(HttpServletRequest request) throws ClassNotFoundException, ParseException{
+    private void getDataFromRequest(HttpServletRequest request) throws ClassNotFoundException, ParseException{
         if(request.getParameter("edtTipoProfissional").equals("P")){
             getProfessionalInfo(request);
         }
@@ -81,11 +83,11 @@ public class ServProfissional extends HttpServlet {
         String nome = request.getParameter("edtNome"), 
                 cpf = request.getParameter("edtCpf"), 
                 rg = request.getParameter("edtRg"), 
-                dataNascimento = request.getParameter("edtDataNasc"), 
+                dataNascimento = request.getParameter("edtDataNasc"),
                 sexo = request.getParameter("cmbSexo"), 
                 email = request.getParameter("edtEmail"), 
                 telefone = request.getParameter("edtTelefone"),
-                cro = request.getParameter("EdtCro");
+                cro = request.getParameter("edtCro");
         //Address's Info
         String rua = request.getParameter("edtRua"), 
                 bairro = request.getParameter("edtBairro"), 

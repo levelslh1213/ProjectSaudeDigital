@@ -14,7 +14,7 @@ import java.util.Date;
  */
 public class ManipulaData {
     public String formatarData(String data) throws Exception {
-        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd"); 
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
         Date date = formato.parse(data); 
         formato.applyPattern("dd/MM/yyyy"); 
         String dataFormatada = formato.format(date);
