@@ -8,6 +8,7 @@ package Control;
 import Model.Endereco;
 import Model.Profissional;
 import Model.Supervisor;
+import Model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -31,8 +32,11 @@ public class ServProfissional extends HttpServlet {
     Supervisor supervisor;
     Endereco endereco;
     String e;
+    Usuario usuario;
     int idEndereco = 0;
-    String idProfissional ="";
+    int idProfissional = 0;
+    int idSupervisor = 0;
+    int idUsuario = 0;
     
     private String destino;
     /**
@@ -49,9 +53,10 @@ public class ServProfissional extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         getDataFromRequest(request);
-        
         insertDataInSession(request);
-        redirectRequest(request, response, "index.html");
+        //redirectRequest(request, response, "index.html");
+        
+        
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
@@ -61,8 +66,8 @@ public class ServProfissional extends HttpServlet {
             out.println("<title>Servlet ServReqObrigatorio</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServReqObrigatorio at " + request.getParameter("edtDataNasc") + "</h1><br>");
-            out.println("<h1>Servlet ServReqObrigatorio at " + this.profissional.getDataNascimento() + "</h1>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.idUsuario+ "</h1><br>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.idProfissional + "</h1>");
             out.println("<p>"+this.e+"</p>");
             out.println("</body>");
             out.println("</html>");
@@ -148,7 +153,17 @@ public class ServProfissional extends HttpServlet {
         
         this.profissional.setEndereco(endereco);
         this.idEndereco = this.profissional.getEndereco().insertAddressInDB(this.profissional.getEndereco());
-        this.idProfissional = this.profissional.insertProfessionalInDB(this.profissional, this.idEndereco);
+        this.idUsuario = createUserForProfessional(this.profissional);
+        this.idProfissional = this.profissional.insertProfessionalInDB(this.profissional, this.idEndereco, this.idUsuario);
+    }
+    
+    public int createUserForProfessional(Profissional profissional) throws ClassNotFoundException{
+        this.usuario = new Usuario();
+        this.usuario.setLogin(profissional.getCro());
+        this.usuario.setSenha(profissional.getCpf());
+        
+        int idUsuario = usuario.insertUserInDB(usuario);
+        return idUsuario;
     }
     
     private void fillSupervisorInfo(
@@ -184,14 +199,16 @@ public class ServProfissional extends HttpServlet {
     private void insertDataInSession(HttpServletRequest request) {
         HttpSession session = request.getSession();
 
-        session.setAttribute("PROFISSIONAL", this.profissional);
-
         if(request.getParameter("edtTipoProfissional").equals("P")){
              session.setAttribute("PROFISSIONAL", this.profissional);
+             session.setAttribute("ID_PROFISSIONAL", this.idProfissional);
          }
          else{
-             //session.setAttribute("SUPERVISOR", this.supervisor);
+             session.setAttribute("SUPERVISOR", this.supervisor);
+             session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
          }
+        session.setAttribute("USUARIO", this.usuario);
+        session.setAttribute("ID_USUARIO", this.idUsuario);
     }
 
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){

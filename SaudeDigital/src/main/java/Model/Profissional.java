@@ -26,6 +26,8 @@ public class Profissional extends Pessoa {
     private ResultSet result;
     private String sql;
     
+    protected Usuario usuario;
+    
     public Profissional() throws ClassNotFoundException{
         this.db = new Controller().connectDB();
     }
@@ -38,16 +40,16 @@ public class Profissional extends Pessoa {
         this.cro = cro;
     }  
     
-    public String insertProfessionalInDB(Profissional profissional, int idEndereco) throws ClassNotFoundException, ParseException{
+    public int insertProfessionalInDB(Profissional profissional, int idEndereco, int idUsuario) throws ClassNotFoundException, ParseException{
         int idProfissional = getNewPrimaryKeyValue();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); 
         
         if(idProfissional == 0){
-            return "";
+            return 0;
         }
         else{
-            sql = "INSERT INTO PROFISSIONAL(ID_PROFISSIONAL, ID_ENDERECO, NOME, DATA_NASCIMENTO, SEXO, RG, CPF, TELEFONE, EMAIL, CRO)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
+            sql = "INSERT INTO PROFISSIONAL(ID_PROFISSIONAL, ID_ENDERECO, NOME, DATA_NASCIMENTO, SEXO, RG, CPF, TELEFONE, EMAIL, CRO, ID_USUARIO)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" ;
             
             try {
                 db = new Controller().connectDB();
@@ -62,12 +64,13 @@ public class Profissional extends Pessoa {
                 statement.setString(8, profissional.getTelefone());
                 statement.setString(9, profissional.getEmail());
                 statement.setString(10, profissional.getCro());
+                statement.setInt(11, idUsuario);
                 statement.execute();
                 statement.close();
                 
-                return "aoba";
+                return idProfissional;
             } catch (SQLException se) {
-                return se.getMessage();
+                return 0;
             }
         }
     }
