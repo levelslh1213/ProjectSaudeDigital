@@ -8,6 +8,10 @@
         <servlet-name>ServProfissional</servlet-name>
         <servlet-class>Control.ServProfissional</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServRegistroProfissional</servlet-name>
+        <servlet-class>Control.ServRegistroProfissional</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServLogin</servlet-name>
         <url-pattern>/ServLogin</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>ServProfissional</servlet-name>
         <url-pattern>/ServProfissional</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServRegistroProfissional</servlet-name>
+        <url-pattern>/ServRegistroProfissional</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

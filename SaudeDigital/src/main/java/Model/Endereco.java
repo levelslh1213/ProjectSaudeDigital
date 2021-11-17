@@ -134,4 +134,39 @@ public class Endereco {
             return 0;
         }
     }
+    
+    public String updateAddressInDB(Endereco endereco, int idEndereco) throws ClassNotFoundException{
+        sql = "UPDATE ENDERECO   SET BAIRRO = ?, RUA = ?, CEP = ?, CIDADE = ?, COMPLEMENTO = ?, ESTADO = ?, NUMERO = ? WHERE ID_ENDERECO = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setString(1, endereco.getBairro());
+                statement.setString(2, endereco.getRua());
+                statement.setString(3, endereco.getCep());
+                statement.setString(4, endereco.getCidade());
+                statement.setString(5, endereco.getComplemento());
+                statement.setString(6, endereco.getEstado());
+                statement.setString(7, endereco.getNumero());
+                statement.setInt(8, idEndereco);
+                statement.executeUpdate();
+                statement.close();
+                return "sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+    
+    public String deleteAddressFromDB(int idEndereco) throws ClassNotFoundException{
+        sql = "DELETE FROM ENDERECO WHERE ID_ENDERECO = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setInt(1, idEndereco);
+                statement.executeUpdate();
+                statement.close();
+                return "Sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
 }

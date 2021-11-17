@@ -26,8 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author paulo
  */
-public class ServProfissional extends HttpServlet {
-
+public class ServRegistroProfissional extends HttpServlet {
     Profissional profissional;
     Supervisor supervisor;
     Endereco endereco;
@@ -37,8 +36,6 @@ public class ServProfissional extends HttpServlet {
     int idProfissional = 0;
     int idSupervisor = 0;
     int idUsuario = 0;
-    
-    private String destino;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -52,9 +49,15 @@ public class ServProfissional extends HttpServlet {
             throws ServletException, IOException, ClassNotFoundException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         
-        getDataFromRequest(request);
         //insertDataInSession(request);
-        redirectRequest(request, response, "inicialProfissional.html");
+        if(request.getParameter("edtTipoOperacao").equals("UPDATE")){
+            getDataFromRequest(request);
+            redirectRequest(request, response, "inicialProfissional.html");
+        }
+        else{
+            processDeleteRegister(request);
+            redirectRequest(request, response, "index.html");
+        }
         
         
         
@@ -66,21 +69,39 @@ public class ServProfissional extends HttpServlet {
             out.println("<title>Servlet ServReqObrigatorio</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServReqObrigatorio at " + this.idUsuario+ "</h1><br>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.idEndereco+ "</h1><br>");
             out.println("<h1>Servlet ServReqObrigatorio at " + this.idProfissional + "</h1>");
-            out.println("<p>"+this.e+"</p>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.e + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
+    
+    private void processDeleteRegister(HttpServletRequest request) throws ClassNotFoundException{
+        getPrimaryKeysValues(request);
+        
+        this.endereco = new Endereco();
+        this.profissional = new Profissional();
+        
+        this.e = this.profissional.deleteProfissionalFromDB(this.idProfissional);
+        this.e = this.endereco.deleteAddressFromDB(this.idEndereco);
+        
+    }
 
     private void getDataFromRequest(HttpServletRequest request) throws ClassNotFoundException, ParseException{
-        if(request.getParameter("edtTipoProfissional").equals("P")){
-            getProfessionalInfo(request);
-        }
-        else{
-            getSupervisorInfo(request);
-        }
+        getPrimaryKeysValues(request);
+        getProfessionalInfo(request);
+    }
+    
+    private void getPrimaryKeysValues(HttpServletRequest request) throws ClassNotFoundException{
+        HttpSession sessao = request.getSession();
+        this.idProfissional =(Integer) sessao.getAttribute("ID_PROFISSIONAL");
+        this.idEndereco = getProfessionalAddress();
+    }
+    
+    private int getProfessionalAddress() throws ClassNotFoundException{
+        this.profissional = new Profissional();
+        return this.profissional.getAddressByProfessionalId(this.idProfissional);
     }
     
     private void getProfessionalInfo(HttpServletRequest request) throws ClassNotFoundException, ParseException{
@@ -152,18 +173,12 @@ public class ServProfissional extends HttpServlet {
         endereco.setNumero(numero);
         
         this.profissional.setEndereco(endereco);
-        this.idEndereco = this.profissional.getEndereco().insertAddressInDB(this.profissional.getEndereco());
+        this.e = this.profissional.getEndereco().updateAddressInDB(this.profissional.getEndereco(), this.idEndereco);
+        this.e = this.profissional.updateProfissionalInDB(this.profissional, this.idProfissional);
+        /*
         this.idUsuario = createUserForProfessional(this.profissional);
         this.idProfissional = this.profissional.insertProfessionalInDB(this.profissional, this.idEndereco, this.idUsuario);
-    }
-    
-    public int createUserForProfessional(Profissional profissional) throws ClassNotFoundException{
-        this.usuario = new Usuario();
-        this.usuario.setLogin(profissional.getCro());
-        this.usuario.setSenha(profissional.getCpf());
-        
-        int idUsuario = usuario.insertUserInDB(usuario);
-        return idUsuario;
+        */
     }
     
     private void fillSupervisorInfo(
@@ -195,21 +210,6 @@ public class ServProfissional extends HttpServlet {
         this.profissional.insertProfessionalInDB(this.profissional, idEndereco);
         */
     }
-   
-    private void insertDataInSession(HttpServletRequest request) {
-        HttpSession session = request.getSession();
-
-        if(request.getParameter("edtTipoProfissional").equals("P")){
-             session.setAttribute("PROFISSIONAL", this.profissional);
-             session.setAttribute("ID_PROFISSIONAL", this.idProfissional);
-         }
-         else{
-             session.setAttribute("SUPERVISOR", this.supervisor);
-             session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
-         }
-        session.setAttribute("USUARIO", this.usuario);
-        session.setAttribute("ID_USUARIO", this.idUsuario);
-    }
 
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){
         RequestDispatcher dispatcher = request.getRequestDispatcher(destino);
@@ -224,8 +224,6 @@ public class ServProfissional extends HttpServlet {
              session.setAttribute("SUPERVISOR", this.supervisor);
              session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
          }
-        session.setAttribute("USUARIO", this.usuario);
-        session.setAttribute("ID_USUARIO", this.idUsuario);
         
         try {
             dispatcher.forward(request, response);
@@ -249,9 +247,9 @@ public class ServProfissional extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServProfissional.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServRegistroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ServProfissional.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServRegistroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -269,9 +267,9 @@ public class ServProfissional extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServProfissional.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServRegistroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ServProfissional.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServRegistroProfissional.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

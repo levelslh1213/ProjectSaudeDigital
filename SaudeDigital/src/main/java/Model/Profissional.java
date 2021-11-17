@@ -90,4 +90,57 @@ public class Profissional extends Pessoa {
             return 0;
         }
     }
+    
+    public int getAddressByProfessionalId(int idProfissional) throws ClassNotFoundException{
+        sql = "SELECT ID_ENDERECO FROM PROFISSIONAL WHERE ID_PROFISSIONAL = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idProfissional);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_ENDERECO");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+     public String updateProfissionalInDB(Profissional profissional, int idProfissional) throws ClassNotFoundException{
+        sql = "UPDATE PROFISSIONAL   SET CPF =?, CRO = ?, DATA_NASCIMENTO = ?, EMAIL = ?, NOME = ?, RG = ?, SEXO = ?, TELEFONE = ? WHERE ID_PROFISSIONAL = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setString(1, profissional.getCpf());
+                statement.setString(2, profissional.getCro());
+                statement.setString(3, profissional.getDataNascimento());
+                statement.setString(4, profissional.getEmail());
+                statement.setString(5, profissional.getNome());
+                statement.setString(6, profissional.getRg());
+                statement.setString(7, profissional.getSexo());
+                statement.setString(8, profissional.getTelefone());
+                statement.setInt(9, idProfissional);
+                statement.executeUpdate();
+                statement.close();
+                return "sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
+     
+    public String deleteProfissionalFromDB(int idProfissional) throws ClassNotFoundException{
+        sql = "DELETE FROM PROFISSIONAL WHERE ID_PROFISSIONAL = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setInt(1, idProfissional);
+                statement.executeUpdate();
+                statement.close();
+                return "Sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
 }
