@@ -4,7 +4,8 @@ package Model;
  *
  * @author paulo
  */
-public class private String     int idPaciente;
+public class QuestinarioSaude {
+    int idPaciente;
     private String queixa;
     private String hitdoenca;
     private String hemorragia;

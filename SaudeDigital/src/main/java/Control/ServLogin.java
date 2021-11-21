@@ -123,21 +123,18 @@ public class ServLogin extends HttpServlet {
     
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){
         RequestDispatcher dispatcher = request.getRequestDispatcher(destino);
-        
-        HttpSession session = request.getSession();
         if(this.tipoLogin.equals("P")){
-             session.setAttribute("ID_PROFISSIONAL", this.idProfissional);
+             request.setAttribute("ID_PROFISSIONAL", this.idProfissional);
          }
         else if(this.tipoLogin.equals("S")){
-             session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
-         }
-        else if(this.tipoLogin.equals("C")){
-            session.setAttribute("ID_PACIENTE", this.idPaciente);
+             request.setAttribute("ID_SUPERVISOR", this.idSupervisor);
         }
-        session.setAttribute("ID_USUARIO", this.idUsuario);
-        session.setAttribute("TIPO_LOGIN", this.tipoLogin);
+        else if(this.tipoLogin.equals("C")){
+            request.setAttribute("ID_PACIENTE", this.idPaciente);
+        }
+        request.setAttribute("ID_USUARIO", this.idUsuario);
+        request.setAttribute("TIPO_LOGIN", this.tipoLogin);
         try {
-            this.message = "Chegou aqui!";
             dispatcher.forward(request, response);
         } catch (Exception e) {
             this.e = e.getMessage();
