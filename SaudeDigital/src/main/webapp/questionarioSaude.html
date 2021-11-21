@@ -70,34 +70,6 @@
         </nav>
     </section>
 
-
-    <section data-bs-version="5.1" class="form6 cid-sKd4BOZjtN mt-0" id="form6-a">
-        <div class="container-fluid">
-            <div class="mbr-section-head">
-                <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
-                    <strong>CPF do Paciente</strong>
-                </h3>
-
-            </div>
-            <div class="row justify-content-center mt-4">
-                <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                    <form action="ServCadastroProfissional" method="POST" class="mbr-form form-with-styler mx-auto"
-                        data-form-title="Form Name">
-                        <input type="hidden" name="edtTipoCadastro" value="Pesquisa">
-                        <div class="dragArea row">
-                            <div class="col-lg-12 col-md- col-sm-12 form-group mb-3" data-for="edtCpf">
-                                <input type="text" name="edtCpf" placeholder="CPF" data-form-field="edtCpf"
-                                    class="form-control" value="" id="name-form6-a">
-                            </div>
-                            <div class="col-auto mbr-section-btn align-center"><button type="submit"
-                                    class="btn btn-secondary display-4">Pesquisar<br></button></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section data-bs-version="5.1" class="form5 cid-sKlPf2cqC1" id="form5-14">
 
 
@@ -108,6 +80,10 @@
                 </h3>
 
             </div>
+            <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtCpf">
+                <input type="text" name="edtCpf" placeholder="CPF" data-form-field="edtCpf" class="form-control"
+                    value="" id="name-form5-14">
+            </div>
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
                     <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
@@ -115,9 +91,8 @@
                         <div class="dragArea row">
 
                             <div class="col-12 form-group mb-3" data-for="edtQueixa">
-                                <textarea name="edtQueixa" placeholder="Queixa principal"
-                                    data-form-field="edtQueixa" class="form-control"
-                                    id="textarea-form5-14"></textarea>
+                                <textarea name="edtQueixa" placeholder="Queixa principal" data-form-field="edtQueixa"
+                                    class="form-control" id="textarea-form5-14"></textarea>
                             </div>
 
                             <div class="col-12 form-group mb-3" data-for="edtHistoria">
@@ -125,7 +100,7 @@
                                     data-form-field="edtHistoria" class="form-control"
                                     id="textarea-form5-14"></textarea>
                             </div>
-                            
+
                             <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbHemorragia">
                                 <p>Já teve hemorragia?</p>
                                 <select name="cmbHemorragia" class="form-control" id="name-form5-14"
@@ -282,6 +257,15 @@
                                 <p>Caxumba</p>
                                 <select name="cmb1Caxumba" class="form-control" id="name-form5-14"
                                     data-form-field="cmb1Caxumba">
+                                    <option value="S">Sim</option>
+                                    <option value="N">Nao</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmb1Varicela">
+                                <p>Varicela</p>
+                                <select name="cmb1Varicela" class="form-control" id="name-form5-14"
+                                    data-form-field="cmb1Varicela">
                                     <option value="S">Sim</option>
                                     <option value="N">Nao</option>
                                 </select>
