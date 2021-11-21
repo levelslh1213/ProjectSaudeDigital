@@ -143,4 +143,21 @@ public class Profissional extends Pessoa {
             return e.getMessage();
         }
     }
+    
+    public int getProfissionalByUser(int idUsuario) throws ClassNotFoundException{
+        sql = "SELECT ID_PROFISSIONAL FROM PROFISSIONAL WHERE ID_USUARIO = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idUsuario);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_PROFISSIONAL");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
 }

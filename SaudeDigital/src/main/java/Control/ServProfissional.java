@@ -231,10 +231,12 @@ public class ServProfissional extends HttpServlet {
         if(request.getParameter("edtTipoProfissional").equals("P")){
              session.setAttribute("PROFISSIONAL", this.profissional);
              session.setAttribute("ID_PROFISSIONAL", this.idProfissional);
+             session.setAttribute("TIPO_LOGIN", "P");
          }
          else{
              session.setAttribute("SUPERVISOR", this.supervisor);
              session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
+             session.setAttribute("TIPO_LOGIN", "S");
          }
         session.setAttribute("USUARIO", this.usuario);
         session.setAttribute("ID_USUARIO", this.idUsuario);

@@ -83,4 +83,26 @@ public class Usuario {
             return 0;
         }
     }
+    
+    public int validateLogin(Usuario usuario) throws ClassNotFoundException{
+        sql = "SELECT *  FROM USUARIO WHERE LOGIN = ?   AND SENHA = ?";
+        int retorno;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setString(1, usuario.getLogin());
+            statement.setString(2, usuario.getSenha());
+            result = statement.executeQuery();
+            if(result.next()){
+                retorno=  result.getInt("ID_USUARIO");
+            }
+            else{
+                retorno= 0;
+            }
+            statement.close();
+            return retorno;
+        } catch (SQLException se) {
+            return 0;
+        }    
+    }
 }

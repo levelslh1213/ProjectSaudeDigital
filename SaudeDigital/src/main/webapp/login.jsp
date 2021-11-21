@@ -87,19 +87,20 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="ServLogin" method="POST" class="mbr-form form-with-styler mx-auto" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="rPhSOuzgwGA7OjIOX8t4ZaDfaFnCDuFTmcuqZBa+wKapcMWYApvVa29gBAkxjJY3sHp2nYBDoveFrwMdCr3CYalEgm8a1Zpz2pGowooJzuVoorg0aIZIunP3bZfwi1Kw">
-                    <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling
-                            out the form!</div>
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">Oops...! some
-                            problem!</div>
-                    </div>
+                <form action="ServLogin" method="POST" class="mbr-form form-with-styler mx-auto" data-form-title="Form Name">
                     <div class="dragArea row">
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="name">
                             <input type="text" name="edtLogin" placeholder="Login" data-form-field="edtLogin" class="form-control" value="" id="name-form6-a">
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="email">
                             <input type="text" name="edtSenha" placeholder="Senha" data-form-field="edtSenha" class="form-control" value="" id="email-form6-a">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 form-group mb-3" data-for="cmbTipoLogin">
+                            <select name="cmbTipoLogin" class="form-control" id="name-form5-14">
+                                <option value="P">Profissional</option>
+                                <option value="S">Supervisor</option>
+                                <option value="C">Paciente</option>
+                            </select>
                         </div>
                         
                         <div class="col-auto mbr-section-btn align-center"><button type="submit" class="btn btn-secondary display-4">Entrar<br></button></div>

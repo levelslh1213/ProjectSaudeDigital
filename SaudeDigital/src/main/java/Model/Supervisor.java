@@ -94,5 +94,22 @@ public class Supervisor extends Pessoa {
             return 0;
         }
     }
+        
+    public int getSupervisorByUser(int idUsuario) throws ClassNotFoundException{
+        sql = "SELECT ID_SUPERVISOR FROM SUPERVISOR WHERE ID_USUARIO = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idUsuario);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_SUPERVISOR");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }    
     
 }
