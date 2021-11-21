@@ -115,14 +115,14 @@ public class Paciente extends Pessoa {
         }
     }
     
-    public int InsertPersonsInfo(Paciente paciente) throws ClassNotFoundException, ParseException{
+    public int InsertPersonsInfo(Paciente paciente, int idUsuario) throws ClassNotFoundException, ParseException{
         int idPaciente = getNewPrimaryKeyValue();
         
         if(idPaciente == 0){
             return 0;
         }
         else{
-            sql = "INSERT INTO PACIENTE (ID_PACIENTE, NOME, DATA_NASCIMENTO, SEXO, RG, CPF, TELEFONE, EMAIL) VALUES(?, ?, ?, ?, ?, ?,?,?)";
+            sql = "INSERT INTO PACIENTE (ID_PACIENTE, NOME, DATA_NASCIMENTO, SEXO, RG, CPF, TELEFONE, EMAIL, ID_USUARIO) VALUES(?, ?, ?, ?, ?, ?,?,?, ?)";
             
             try {
                 db = new Controller().connectDB();
@@ -135,6 +135,7 @@ public class Paciente extends Pessoa {
                 statement.setString(6, paciente.getCpf());
                 statement.setString(7, paciente.getTelefone());
                 statement.setString(8, paciente.getEmail());
+                statement.setInt(9, idUsuario);
                 statement.execute();
                 statement.close();
                 
@@ -180,6 +181,23 @@ public class Paciente extends Pessoa {
                 return "sucesso";
         } catch (SQLException e) {
             return e.getMessage();
+        }
+    }
+    
+    public int getPacienteByUser(int idUsuario) throws ClassNotFoundException{
+        sql = "SELECT ID_PACIENTE FROM PACIENTE WHERE ID_USUARIO = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idUsuario);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_PACIENTE");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
         }
     }
 }
