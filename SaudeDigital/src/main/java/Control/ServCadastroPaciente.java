@@ -101,8 +101,8 @@ public class ServCadastroPaciente extends HttpServlet {
         
         if(this.tipoCadastro.equals("Pessoa")){
             getPersonDataFromRequest(request);
-            insertPersonInDb();
             createUserForPaciente();
+            insertPersonInDb();            
         }
         else if(this.tipoCadastro.equals("Pesquisa")){
             getSearchDataFromRequest(request);
@@ -203,7 +203,7 @@ public class ServCadastroPaciente extends HttpServlet {
     }
     
     private void insertPersonInDb() throws ClassNotFoundException, ParseException{
-        this.idPaciente = this.paciente.InsertPersonsInfo(this.paciente);
+        this.idPaciente = this.paciente.InsertPersonsInfo(this.paciente, this.idUsuario);
     }   
         
     public void createUserForPaciente() throws ClassNotFoundException{

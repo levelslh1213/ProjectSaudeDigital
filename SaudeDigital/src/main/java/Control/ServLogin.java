@@ -60,7 +60,7 @@ public class ServLogin extends HttpServlet {
                 redirectRequest(request,response,"inicialProfissional.jsp");
             }
             else{
-                redirectRequest(request,response,"inicialPaciente.html");
+                redirectRequest(request,response,"inicialPaciente.jsp");
             }
         }
         else{
@@ -112,6 +112,10 @@ public class ServLogin extends HttpServlet {
         else if(tipoLogin.equals("S")){
             this.supervisor = new Supervisor();
             this.idSupervisor = this.supervisor.getSupervisorByUser(this.idUsuario);
+        }
+        else if(tipoLogin.equals("C")){
+            this.paciente = new Paciente();
+            this.idPaciente = this.paciente.getPacienteByUser(this.idUsuario);
         }
         
         
