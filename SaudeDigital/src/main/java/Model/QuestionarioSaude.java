@@ -4,8 +4,7 @@ package Model;
  *
  * @author paulo
  */
-public class QuestionarioSaude{
-    int idPaciente;
+public class private String     int idPaciente;
     private String queixa;
     private String hitdoenca;
     private String hemorragia;
@@ -30,6 +29,42 @@ public class QuestionarioSaude{
     private String outra_doenca;
     private String fumanete;
     private String frequencia; 
+    private String histgest;
+    private String parto;
+    private String prob_parto;
+    private String amamentacao;
+    private String anestesia;
+    private String grave_doenca;
+    private String vacina;
+    private String aprendizado;
+    private String estado_ani;
+    private String sono;
+    private String conduta_psic;
+    private String alimentacao;
+    private String sociabilidade;
+    private String conduta_pato;
+    private String labio;
+    private String mucosa;
+    private String lingua;
+    private String boca;
+    private String palato;
+    private String garganta;
+    private String palato_mole;
+    private String alveolar;
+    private String gengiva;
+    private String glandula;
+    private String linfonodos;
+    private String atm;
+    private String musculo;
+    private String oclusao;
+    private String pressaomin;
+    private String pressaomax;
+    private String diagpresuntivo;
+    private String examecompl;
+    private String diagdef;
+    private String tratamento;
+    private String planotrat;
+    private String atendimentourg;
 
     public String getTuberculose() {
         return tuberculose;
