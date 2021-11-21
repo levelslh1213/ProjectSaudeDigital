@@ -4,25 +4,42 @@
  * and open the template in the editor.
  */
 package Utilitarios;
+import Control.Controller;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 /**
  *
  * @author paulo
  */
 public class Disciplina {    
-    public ArrayList<String> disciplinas = new ArrayList();
+    public ResultSet disciplinas;
+    private Connection db;
+    private PreparedStatement statement;
+    private ResultSet result;
+    private String sql;
     
-    public Disciplina(){
-        preencherDisciplinas();
+    
+    public Disciplina() throws ClassNotFoundException{
+        this.disciplinas = preencherDisciplinas();
     }
     
-    private void preencherDisciplinas(){
-        disciplinas.add("Pesq. da Prática em Ciência da Computação I");
-        disciplinas.add("Pesq. da Prática em Ciência da Computação II");
-        disciplinas.add("Pesq. da Prática em Ciência da Computação III");
+    
+    private ResultSet preencherDisciplinas() throws ClassNotFoundException{
+        sql = "SELECT * FROM DISCIPLINA";
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            result = statement.executeQuery();
+            return result;
+        } catch (SQLException e) {
+            return null;
+        }
     }
     
     

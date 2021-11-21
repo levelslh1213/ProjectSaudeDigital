@@ -20,7 +20,25 @@
     int idProfissional = (Integer)sessao.getAttribute("ID_PROFISSIONAL");
     String teste ="";
 
-    String sql = "SELECT P.NOME,	   P.DATA_NASCIMENTO,	   P.SEXO,	   P.RG,	   P.CPF,	   P.TELEFONE,	   P.EMAIL,	   P.CRO,	   E.BAIRRO,	   E.CEP,	   E.CIDADE,	   E.COMPLEMENTO,	   E.ESTADO,	   E.NUMERO,	   E.RUA  FROM PROFISSIONAL P  INNER JOIN ENDERECO E    ON P.ID_ENDERECO = E.ID_ENDERECO WHERE P.ID_PROFISSIONAL = ?";
+    String sql = "SELECT P.NOME,	   "
+            + "P.DATA_NASCIMENTO,	   "
+            + "P.SEXO,	   "
+            + "P.RG,	   "
+            + "P.CPF,	   "
+            + "P.TELEFONE,	   "
+            + "P.EMAIL,	   "
+            + "P.CRO,	   "
+            + "E.BAIRRO,	   "
+            + "E.CEP,	   "
+            + "E.CIDADE,	   "
+            + "E.COMPLEMENTO,	   "
+            + "E.ESTADO,	   "
+            + "E.NUMERO,	   "
+            + "E.RUA  "
+            + "FROM PROFISSIONAL P  "
+            + "INNER JOIN ENDERECO E    "
+            + "ON P.ID_ENDERECO = E.ID_ENDERECO "
+            + "WHERE P.ID_PROFISSIONAL = ?";
         try {
             Connection db = new Controller().connectDB();
             PreparedStatement statement = db.prepareStatement(sql);

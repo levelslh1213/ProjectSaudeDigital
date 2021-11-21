@@ -67,7 +67,7 @@ public class ServProfissional extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ServReqObrigatorio at " + this.idUsuario+ "</h1><br>");
-            out.println("<h1>Servlet ServReqObrigatorio at " + this.idProfissional + "</h1>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.idSupervisor + "</h1>");
             out.println("<p>"+this.e+"</p>");
             out.println("</body>");
             out.println("</html>");
@@ -105,7 +105,7 @@ public class ServProfissional extends HttpServlet {
         fillProfessionalInfo(nome,cpf, rg, dataNascimento, sexo, email, telefone, cro, rua, bairro, complemento, cep, cidade, estado, numero);
     }
     
-    private void getSupervisorInfo(HttpServletRequest request) throws ClassNotFoundException{
+    private void getSupervisorInfo(HttpServletRequest request) throws ClassNotFoundException, ParseException{
         //Person's Info
         String nome = request.getParameter("edtNome"), 
                 cpf = request.getParameter("edtCpf"), 
@@ -115,6 +115,8 @@ public class ServProfissional extends HttpServlet {
                 email = request.getParameter("edtEmail"), 
                 telefone = request.getParameter("edtTelefone"),
                 cro = request.getParameter("edtCro");
+        
+        int idDisciplina = Integer.parseInt(request.getParameter("cmbDisciplina"));
         //Address's Info
         String rua = request.getParameter("edtRua"), 
                 bairro = request.getParameter("edtBairro"), 
@@ -124,7 +126,7 @@ public class ServProfissional extends HttpServlet {
                 estado = request.getParameter("edtEstado"),
                 numero = request.getParameter("edtNumero");
         
-        fillSupervisorInfo(nome,cpf, rg, dataNascimento, sexo, email, telefone, cro, rua, bairro, complemento, cep, cidade, estado, numero);
+        fillSupervisorInfo(nome,cpf, rg, dataNascimento, sexo, email, telefone, cro, idDisciplina, rua, bairro, complemento, cep, cidade, estado, numero);
     }
     
     private void fillProfessionalInfo(
@@ -166,9 +168,18 @@ public class ServProfissional extends HttpServlet {
         return idUsuario;
     }
     
+    public int createUserForSupervisor(Supervisor supervisor) throws ClassNotFoundException{
+        this.usuario = new Usuario();
+        this.usuario.setLogin(supervisor.getCro());
+        this.usuario.setSenha(supervisor.getCpf());
+        
+        int idUsuario = usuario.insertUserInDB(usuario);
+        return idUsuario;
+    }
+    
     private void fillSupervisorInfo(
-        String nome, String cpf, String rg, String dataNascimento, String sexo, String email, String telefone, String cro,
-        String rua, String bairro, String complemento, String cep, String cidade, String estado, String numero) throws ClassNotFoundException{
+        String nome, String cpf, String rg, String dataNascimento, String sexo, String email, String telefone, String cro, int idDisciplina,
+        String rua, String bairro, String complemento, String cep, String cidade, String estado, String numero) throws ClassNotFoundException, ParseException{
         int idEndereco = 0;
         
         this.supervisor = new Supervisor();
@@ -180,6 +191,7 @@ public class ServProfissional extends HttpServlet {
         this.supervisor.setEmail(email);
         this.supervisor.setTelefone(telefone);
         this.supervisor.setCro(cro);
+        this.supervisor.setIdDisciplina(idDisciplina);
         
         endereco = new Endereco();
         endereco.setRua(rua);
@@ -191,9 +203,9 @@ public class ServProfissional extends HttpServlet {
         endereco.setNumero(numero);
         
         this.supervisor.setEndereco(endereco);
-        /*idEndereco = this.profissional.getEndereco().insertAddressInDB(this.profissional.getEndereco());
-        this.profissional.insertProfessionalInDB(this.profissional, idEndereco);
-        */
+        this.idEndereco = this.supervisor.getEndereco().insertAddressInDB(this.supervisor.getEndereco());
+        this.idUsuario = createUserForSupervisor(this.supervisor);
+        this.idSupervisor = this.supervisor.insertSupervisorInDB(this.supervisor, this.idEndereco, this.idUsuario);
     }
    
     private void insertDataInSession(HttpServletRequest request) {

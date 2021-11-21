@@ -4,6 +4,7 @@
     Author     : paulo
 --%>
 
+<%@page import="Utilitarios.Disciplina"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -108,13 +109,27 @@
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtCro">
                             <input type="text" name="edtCro" placeholder="CRO" class="form-control" value="" id="name-form5-14">
                         </div>
+                        <%
+                        if(request.getParameter("Tipo_Prof").equals("S")){
+                           %>
+                           
                         <div class="col-12 form-group mb-3" data-for="cmbDisciplina">
                             <select name="cmbDisciplina" class="form-control" id="name-form5-14">
-                                <option value="M">Disciplina1</option>
-                                <option value="F">Disciplina2</option>
+                           <%
+                               Disciplina disciplina = new Disciplina();
+                               int valor =0;
+                               String descricao= "";
+                               while(disciplina.disciplinas.next()){
+                                    valor = disciplina.disciplinas.getInt("ID_DISCIPLINA");
+                                    descricao = disciplina.disciplinas.getString("DESCRICAO");
+                           %>
+                                <option value="<%=valor%>"><%=descricao%></option>
+                           <%
+                               }
+                           %>
                             </select>
                         </div>
-
+                       <% } %>
                         <br><br><br>
 
                         <div class="mbr-section-head mb-3 mt-3">
