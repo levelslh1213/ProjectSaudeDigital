@@ -115,8 +115,8 @@
                             <span class="mbr-iconfont mobi-mbri-letter mobi-mbri"></span>
                         </div>
                         <h4 class="card-title mbr-fonts-style mb-2 display-2"><strong>Cadastrar Paciente</strong></h4>
-                        <p class="mbr-text mbr-fonts-style mb-2 display-4">Ficha de Identificação e Login</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-secondary">Acessar --&gt;</a></h5>
+                        <p class="mbr-text mbr-fonts-style mb-2 display-4">Informações pessoais e Login</p>
+                        <h5 class="link mbr-fonts-style display-7"><a href="cadastroUsuario.html" class="text-secondary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>

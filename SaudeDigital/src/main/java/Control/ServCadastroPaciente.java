@@ -6,7 +6,6 @@
 package Control;
 
 import Model.Paciente;
-import Model.Profissional;
 import Model.Supervisor;
 import Model.Usuario;
 import java.io.IOException;
@@ -25,21 +24,19 @@ import javax.servlet.http.HttpSession;
  *
  * @author paulo
  */
-public class ServLogin extends HttpServlet {
+public class ServCadastroPaciente extends HttpServlet {
 
-    Usuario usuario;
     Paciente paciente;
-    Profissional profissional;
-    Supervisor supervisor;
+    Usuario usuario;
     
-    int idPaciente;
-    int idProfissional;
-    int idSupervisor;
-    int idUsuario;
+    int idPaciente = 0;
+    int idUsuario = 0;
     
     String message = "";
     String tipoLogin = "";
+    String tipoCadastro = "";
     String e = "";
+    String redirecParam = "";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,16 +52,16 @@ public class ServLogin extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         getDataFromRequest(request);
-        if(this.idUsuario != 0){
-            if((this.tipoLogin.equals("P")) || (this.tipoLogin.equals("S"))){
-                redirectRequest(request,response,"inicialProfissional.jsp");
+        
+        HttpSession session = request.getSession();
+        if(tipoCadastro.equals("Pessoa")){
+            request.setAttribute("ID_PACIENTE_CADASTRADO", this.idPaciente);
+            if(this.redirecParam != null){
+                redirectRequest(request, response, "fichaIdentificacao.html");
             }
             else{
-                redirectRequest(request,response,"inicialPaciente.html");
+                redirectRequest(request, response, "inicialProfissional.jsp");
             }
-        }
-        else{
-            redirectRequest(request,response,"login.jsp");
         }
         
         try (PrintWriter out = response.getWriter()) {
@@ -76,9 +73,8 @@ public class ServLogin extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Tipo login = " + this.tipoLogin+ "</h1><br>");
+            out.println("<h1>Servlet Tipo login = " + this.tipoCadastro+ "</h1><br>");
             out.println("<h1>Servlet idUsuario = " + this.idUsuario+ "</h1><br>");
-            out.println("<h1>Servlet idProfissional = " + this.idProfissional+ "</h1><br>");
-            out.println("<h1>Servlet idSupervisor = " + this.idSupervisor+ "</h1><br>");
             out.println("<h1>Servlet idPaciente = " + this.idPaciente+ "</h1><br>");
             out.println("<h1>Servlet message = " + this.message+ "</h1><br>");
             out.println("<h1>Servlet Exception = " + this.e+ "</h1><br>");
@@ -88,52 +84,63 @@ public class ServLogin extends HttpServlet {
     }
     
     private void getDataFromRequest(HttpServletRequest request) throws ClassNotFoundException, ParseException{
-        String login = request.getParameter("edtLogin"),
-               senha = request.getParameter("edtSenha"),
-               tipoLogin = request.getParameter("cmbTipoLogin");
-               
-        fillLoginInfo(login, senha, tipoLogin);
+    
+        this.tipoCadastro = request.getParameter("edtTipoCadastro");
+        this.redirecParam = request.getParameter("ckIdentificacao");
+        
+        if(this.tipoCadastro.equals("Pessoa")){
+            getPersonDataFromRequest(request);
+            insertPersonInDb();
+            createUserForPaciente();
+            return;
+        }
+        
     }
     
-    private void fillLoginInfo(
-        String login, String senha, String tipoLogin) throws ClassNotFoundException, ParseException{
-
-        this.usuario = new Usuario();
-        this.usuario.setLogin(login);
-        this.usuario.setSenha(senha);
-        this.idUsuario = this.usuario.validateLogin(this.usuario);
+    private void getPersonDataFromRequest(HttpServletRequest request){
+        //Person's infos
+        String nome = request.getParameter("edtNome"), 
+                cpf = request.getParameter("edtCpf"), 
+                rg = request.getParameter("edtRg"), 
+                dataNascimento = request.getParameter("edtDataNasc"),
+                sexo = request.getParameter("cmbSexo"), 
+                email = request.getParameter("edtEmail"), 
+                telefone = request.getParameter("edtTelefone");
         
-        this.tipoLogin = tipoLogin;
-        
-        if(tipoLogin.equals("P")){
-            this.profissional = new Profissional();
-            this.idProfissional =  this.profissional.getProfissionalByUser(this.idUsuario);
-        }
-        else if(tipoLogin.equals("S")){
-            this.supervisor = new Supervisor();
-            this.idSupervisor = this.supervisor.getSupervisorByUser(this.idUsuario);
-        }
-        
-        
+        fillPersonInfo(nome, cpf, rg, dataNascimento, sexo, email, telefone);
     }
+    
+    private void fillPersonInfo(
+            String nome, String cpf, String rg, String dataNascimento, 
+            String sexo, String email, String telefone){
+        
+        this.paciente = new Paciente();
+        this.paciente.setNome(nome);
+        this.paciente.setCpf(cpf);
+        this.paciente.setRg(rg);
+        this.paciente.setDataNascimento(dataNascimento);
+        this.paciente.setSexo(sexo);
+        this.paciente.setEmail(email);
+        this.paciente.setTelefone(telefone);    
+    }
+    
+    private void insertPersonInDb() throws ClassNotFoundException, ParseException{
+        this.idPaciente = this.paciente.InsertPersonsInfo(this.paciente);
+    }   
+        
+    public void createUserForPaciente() throws ClassNotFoundException{
+        this.usuario = new Usuario();
+        this.usuario.setLogin(this.paciente.getNome());
+        this.usuario.setSenha(this.paciente.getCpf());
+        
+        this.idUsuario = usuario.insertUserInDB(usuario);
+    }
+    
     
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){
         RequestDispatcher dispatcher = request.getRequestDispatcher(destino);
         
-        HttpSession session = request.getSession();
-        if(this.tipoLogin.equals("P")){
-             session.setAttribute("ID_PROFISSIONAL", this.idProfissional);
-         }
-        else if(this.tipoLogin.equals("S")){
-             session.setAttribute("ID_SUPERVISOR", this.idSupervisor);
-         }
-        else if(this.tipoLogin.equals("C")){
-            session.setAttribute("ID_PACIENTE", this.idPaciente);
-        }
-        session.setAttribute("ID_USUARIO", this.idUsuario);
-        session.setAttribute("TIPO_LOGIN", this.tipoLogin);
         try {
-            this.message = "Chegou aqui!";
             dispatcher.forward(request, response);
         } catch (Exception e) {
             this.e = e.getMessage();
@@ -155,9 +162,9 @@ public class ServLogin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ServLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -175,9 +182,9 @@ public class ServLogin extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ServLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
-            Logger.getLogger(ServLogin.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServCadastroPaciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

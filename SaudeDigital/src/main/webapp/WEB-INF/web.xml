@@ -12,6 +12,10 @@
         <servlet-name>ServRegistroProfissional</servlet-name>
         <servlet-class>Control.ServRegistroProfissional</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServCadastroPaciente</servlet-name>
+        <servlet-class>Control.ServCadastroPaciente</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServLogin</servlet-name>
         <url-pattern>/ServLogin</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ServRegistroProfissional</servlet-name>
         <url-pattern>/ServRegistroProfissional</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServCadastroPaciente</servlet-name>
+        <url-pattern>/ServCadastroPaciente</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
