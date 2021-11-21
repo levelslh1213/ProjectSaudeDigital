@@ -1,3 +1,18 @@
+<%-- 
+    Document   : fichaIdentificacao
+    Created on : 21 de nov. de 2021, 15:00:09
+    Author     : paulo
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    int idPaciente =0 ;
+    if(request.getAttribute("ID_PACIENTE_CADASTRADO") != null){
+        idPaciente = (int) request.getAttribute("ID_PACIENTE_CADASTRADO");
+    }
+%>
+
 <!DOCTYPE html>
 <html  >
 <head>
@@ -58,7 +73,8 @@
         </nav>
     </section>
 
-    
+    <% if(request.getAttribute("ID_PACIENTE_CADASTRADO") == null){%>
+
     <section data-bs-version="5.1" class="form6 cid-sKd4BOZjtN mt-0" id="form6-a">    
         <div class="container-fluid">
             <div class="mbr-section-head">
@@ -68,7 +84,7 @@
             </div>
             <div class="row justify-content-center mt-4">
                 <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                    <form action="ServCadastroProfissional" method="POST" class="mbr-form form-with-styler mx-auto" data-form-title="Form Name">
+                    <form action="ServCadastroPaciente" method="POST" class="mbr-form form-with-styler mx-auto" data-form-title="Form Name">
                         <input type="hidden" name="edtTipoCadastro" value="Pesquisa">
                         <div class="dragArea row">
                             <div class="col-lg-12 col-md- col-sm-12 form-group mb-3" data-for="edtCpf">
@@ -82,6 +98,7 @@
         </div>
     </section>
 
+    <%}%>
 <section data-bs-version="5.1" class="form5 cid-sKlPf2cqC1" id="form5-14">
     
     
@@ -94,7 +111,9 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
+                <form action="ServCadastroPaciente" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
+                    <input type="hidden" name="edtTipoCadastro" value="Ficha">
+                    <input type="hidden" name="edtIdPaciente" value="<%=idPaciente%>">
                     <div class="dragArea row">
                         
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtPeso">
@@ -158,7 +177,7 @@
                         <div class="col-12 form-group mb-3" data-for="edtComplemento">
                             <input type="text" name="edtComplemento" placeholder="Complemento" data-form-field="edtComplemento" class="form-control" value="" id="url-form5-14">
                         </div>
-                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtNumero">
+                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="ededtNumerotRg">
                             <input type="text" name="edtNumero" placeholder="Número" data-form-field="edtNumero" class="form-control" value="" id="email-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtCep">

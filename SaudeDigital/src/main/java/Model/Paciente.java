@@ -20,8 +20,8 @@ import java.text.SimpleDateFormat;
  * @author E181
  */
 public class Paciente extends Pessoa {
-    private double peso;
-    private double altura;
+    private float peso;
+    private float altura;
     private String cor;
     private String escolaridade;
     private String profissao;
@@ -34,19 +34,19 @@ public class Paciente extends Pessoa {
     private ResultSet result;
     private String sql;
     
-    public double getPeso() {
+    public float getPeso() {
         return peso;
     }
 
-    public void setPeso(double peso) {
+    public void setPeso(float peso) {
         this.peso = peso;
     }
 
-    public double getAltura() {
+    public float getAltura() {
         return altura;
     }
 
-    public void setAltura(double altura) {
+    public void setAltura(float altura) {
         this.altura = altura;
     }
 
@@ -142,6 +142,44 @@ public class Paciente extends Pessoa {
             } catch (SQLException se) {
                 return 0;
             }
+        }
+    }
+    
+    public int getPacienteByCpf(String cpf) throws ClassNotFoundException{
+        sql = "SELECT ID_PACIENTE FROM PACIENTE WHERE CPF = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setString(1, cpf);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_PACIENTE");
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+    public String insertFichaInfoInDB(Paciente paciente, int idEndereco, int idPaciente) throws ClassNotFoundException{
+        sql = "UPDATE PACIENTE    SET ID_ENDERECO = ?, PESO = ?, ALTURA = ?, COR = ?, ESCOLARIDADE = ?, ESTADO_CIVIL = ?, NATURALIDADE = ?, ESTADO = ? WHERE ID_PACIENTE = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setInt(1, idEndereco);
+                statement.setFloat(2, paciente.getPeso());
+                statement.setFloat(3, paciente.getAltura());
+                statement.setString(4, paciente.getCor());
+                statement.setString(5, paciente.getEscolaridade());
+                statement.setString(6, paciente.getEstadoCivil());
+                statement.setString(7, paciente.getNaturalidade());
+                statement.setString(8, paciente.getEstado());
+                statement.setInt(9, idPaciente);
+                statement.executeUpdate();
+                statement.close();
+                return "sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
         }
     }
 }

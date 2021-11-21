@@ -5,6 +5,7 @@
  */
 package Control;
 
+import Model.Endereco;
 import Model.Paciente;
 import Model.Supervisor;
 import Model.Usuario;
@@ -28,9 +29,11 @@ public class ServCadastroPaciente extends HttpServlet {
 
     Paciente paciente;
     Usuario usuario;
+    Endereco endereco;
     
     int idPaciente = 0;
     int idUsuario = 0;
+    int idEndereco = 0;
     
     String message = "";
     String tipoLogin = "";
@@ -57,11 +60,18 @@ public class ServCadastroPaciente extends HttpServlet {
         if(tipoCadastro.equals("Pessoa")){
             request.setAttribute("ID_PACIENTE_CADASTRADO", this.idPaciente);
             if(this.redirecParam != null){
-                redirectRequest(request, response, "fichaIdentificacao.html");
+                redirectRequest(request, response, "fichaIdentificacao.jsp");
             }
             else{
                 redirectRequest(request, response, "inicialProfissional.jsp");
             }
+        }
+        else if(tipoCadastro.equals("Pesquisa")){
+            request.setAttribute("ID_PACIENTE_CADASTRADO", this.idPaciente);
+            redirectRequest(request, response, "fichaIdentificacao.jsp");
+        }
+        else if(tipoCadastro.equals("Ficha")){
+            redirectRequest(request, response, "inicialProfissional.jsp");
         }
         
         try (PrintWriter out = response.getWriter()) {
@@ -76,6 +86,7 @@ public class ServCadastroPaciente extends HttpServlet {
             out.println("<h1>Servlet Tipo login = " + this.tipoCadastro+ "</h1><br>");
             out.println("<h1>Servlet idUsuario = " + this.idUsuario+ "</h1><br>");
             out.println("<h1>Servlet idPaciente = " + this.idPaciente+ "</h1><br>");
+            out.println("<h1>Servlet idEndereco = " + this.idEndereco+ "</h1><br>");
             out.println("<h1>Servlet message = " + this.message+ "</h1><br>");
             out.println("<h1>Servlet Exception = " + this.e+ "</h1><br>");
             out.println("</body>");
@@ -92,9 +103,76 @@ public class ServCadastroPaciente extends HttpServlet {
             getPersonDataFromRequest(request);
             insertPersonInDb();
             createUserForPaciente();
-            return;
+        }
+        else if(this.tipoCadastro.equals("Pesquisa")){
+            getSearchDataFromRequest(request);
+        }
+        else if(this.tipoCadastro.equals("Ficha")){
+            getFichaDataFromRequest(request);
+            insertFichaInfoInDB();
         }
         
+    }
+    private void getFichaDataFromRequest(HttpServletRequest request) throws ClassNotFoundException{
+        this.idPaciente = Integer.parseInt(request.getParameter("edtIdPaciente"));
+        float peso = Float.parseFloat(request.getParameter("edtPeso")),
+              altura = Float.parseFloat(request.getParameter("edtAltura"));
+        
+        String cor = request.getParameter("cmbCor"),
+               estadoCivil = request.getParameter("cmbEstadoCivil"),
+               escolaridade = request.getParameter("cmbEscolaridade"),
+               naturalidade = request.getParameter("edtNaturalidade"),
+               estadoNaturalizado = request.getParameter("edtEstado");
+        
+        //getAddresInfo
+        
+        String rua = request.getParameter("edtRua"), 
+                bairro = request.getParameter("edtBairro"), 
+                complemento = request.getParameter("edtComplemento"), 
+                cep = request.getParameter("edtCep"), 
+                cidade = request.getParameter("edtCidade"), 
+                estado = request.getParameter("edtEstado"),
+                numero = request.getParameter("edtNumero");
+        
+        fillFichaInfo(peso, altura, cor, estadoCivil, escolaridade, naturalidade, estadoNaturalizado, rua, bairro, complemento, cep, cidade, estado, numero);
+    }
+    
+    private void fillFichaInfo(
+            float peso, float altura, String cor, String estadoCivil, String escolaridade, String naturalidade, String estadoNaturalizado, 
+            String rua, String bairro, String complemento, String cep, String cidade, String estado, String numero) throws ClassNotFoundException{
+        
+        this.paciente = new Paciente();
+        this.paciente.setPeso(peso);
+        this.paciente.setAltura(altura);
+        this.paciente.setCor(cor);
+        this.paciente.setEstadoCivil(estadoCivil);
+        this.paciente.setEscolaridade(escolaridade);
+        this.paciente.setNaturalidade(naturalidade);
+        this.paciente.setEstado(estadoNaturalizado);
+        
+        endereco = new Endereco();
+        endereco.setBairro(bairro);
+        endereco.setCep(cep);
+        endereco.setCidade(cidade);
+        endereco.setComplemento(complemento);
+        endereco.setEstado(estado);
+        endereco.setNumero(numero);
+        endereco.setRua(rua);
+        
+        this.paciente.setEndereco(endereco);
+    }
+    
+    private void insertFichaInfoInDB() throws ClassNotFoundException, ParseException{
+        this.idEndereco = this.paciente.getEndereco().insertAddressInDB(this.paciente.getEndereco());
+        this.message = this.paciente.insertFichaInfoInDB(this.paciente, this.idEndereco, this.idPaciente);
+    }
+    
+    private void getSearchDataFromRequest(HttpServletRequest request) throws ClassNotFoundException{
+        //Person's infos
+        String cpf = request.getParameter("edtCpf");
+        
+        this.paciente = new Paciente();
+        this.idPaciente = this.paciente.getPacienteByCpf(cpf);
     }
     
     private void getPersonDataFromRequest(HttpServletRequest request){
