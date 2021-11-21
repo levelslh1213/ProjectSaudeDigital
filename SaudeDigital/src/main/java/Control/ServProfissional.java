@@ -54,7 +54,7 @@ public class ServProfissional extends HttpServlet {
         
         getDataFromRequest(request);
         //insertDataInSession(request);
-        redirectRequest(request, response, "inicialProfissional.html");
+        redirectRequest(request, response, "inicialProfissional.jsp");
         
         
         
@@ -68,6 +68,7 @@ public class ServProfissional extends HttpServlet {
             out.println("<body>");
             out.println("<h1>Servlet ServReqObrigatorio at " + this.idUsuario+ "</h1><br>");
             out.println("<h1>Servlet ServReqObrigatorio at " + this.idSupervisor + "</h1>");
+            out.println("<h1>Servlet ServReqObrigatorio at " + this.idProfissional + "</h1>");
             out.println("<p>"+this.e+"</p>");
             out.println("</body>");
             out.println("</html>");
@@ -240,7 +241,6 @@ public class ServProfissional extends HttpServlet {
          }
         session.setAttribute("USUARIO", this.usuario);
         session.setAttribute("ID_USUARIO", this.idUsuario);
-        
         try {
             dispatcher.forward(request, response);
         } catch (Exception e) {

@@ -57,7 +57,7 @@ public class ServLogin extends HttpServlet {
         getDataFromRequest(request);
         if(this.idUsuario != 0){
             if((this.tipoLogin.equals("P")) || (this.tipoLogin.equals("S"))){
-                redirectRequest(request,response,"inicialProfissional.html");
+                redirectRequest(request,response,"inicialProfissional.jsp");
             }
             else{
                 redirectRequest(request,response,"inicialPaciente.html");
@@ -81,6 +81,7 @@ public class ServLogin extends HttpServlet {
             out.println("<h1>Servlet idSupervisor = " + this.idSupervisor+ "</h1><br>");
             out.println("<h1>Servlet idPaciente = " + this.idPaciente+ "</h1><br>");
             out.println("<h1>Servlet message = " + this.message+ "</h1><br>");
+            out.println("<h1>Servlet Exception = " + this.e+ "</h1><br>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -130,8 +131,9 @@ public class ServLogin extends HttpServlet {
             session.setAttribute("ID_PACIENTE", this.idPaciente);
         }
         session.setAttribute("ID_USUARIO", this.idUsuario);
-        
+        session.setAttribute("TIPO_LOGIN", this.tipoLogin);
         try {
+            this.message = "Chegou aqui!";
             dispatcher.forward(request, response);
         } catch (Exception e) {
             this.e = e.getMessage();

@@ -112,4 +112,18 @@ public class Supervisor extends Pessoa {
         }
     }    
     
+    public ResultSet getSupervisorById(int idSupervisor) throws ClassNotFoundException{
+        sql = "SELECT * FROM SUPERVISOR WHERE ID_SUPERVISOR = ?";
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idSupervisor);
+            result = statement.executeQuery();
+            result.next();
+            return result;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+    
 }
