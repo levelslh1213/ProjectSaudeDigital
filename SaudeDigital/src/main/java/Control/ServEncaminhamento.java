@@ -61,15 +61,16 @@ public class ServEncaminhamento extends HttpServlet {
                 graducao = request.getParameter("cmbGraducao"),
                 pos = request.getParameter("cmbPos"),
                 projeto = request.getParameter("cmbProjeto"),
-                obs = request.getParameter("edtObs");
+                obs = request.getParameter("edtObs"),
+                data = request.getParameter("edtData");
         
-        fillEncaminhamentoInfo(supervisor, paciente, profissional, disciplina, graducao, pos, projeto, obs);       
+        fillEncaminhamentoInfo(supervisor, paciente, profissional, disciplina, graducao, pos, projeto, obs, data);       
         
     }
     
     private void fillEncaminhamentoInfo(
             String supervisor, String paciente, String profissional, String disciplina, 
-            String graducao, String pos, String projeto, String obs){
+            String graducao, String pos, String projeto, String obs, String data){
         
         this.encaminhamento = new Encaminhamento();
         this.encaminhamento.setSupervisor(supervisor);
@@ -80,6 +81,7 @@ public class ServEncaminhamento extends HttpServlet {
         this.encaminhamento.setPos(pos);
         this.encaminhamento.setProjeto(projeto);
         this.encaminhamento.setObs(obs);
+        this.encaminhamento.setData(data);
     }
     
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){

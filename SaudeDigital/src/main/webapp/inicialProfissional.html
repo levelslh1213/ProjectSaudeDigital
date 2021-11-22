@@ -1,44 +1,3 @@
-<%-- 
-    Document   : inicialProfissional
-    Created on : 21 de nov. de 2021, 01:15:46
-    Author     : paulo
---%>
-
-<%@page import="Model.Supervisor"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="Model.Endereco"%>
-<%@page import="Model.Profissional"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<%
-    ResultSet result = null;
-    
-    Profissional profissional = new Profissional();
-    Supervisor supervisor = new Supervisor();
-    Endereco endereco = new Endereco();
-    
-    int idProfissional = 0;
-    int idSupervisor = 0;
-    int idUsuario = 0;
-    
-    HttpSession sessao = request.getSession();
-    String tipoLogin = (String) sessao.getAttribute("TIPO_LOGIN");
-    
-    if(tipoLogin.equals("P")){
-        idProfissional = (int) sessao.getAttribute("ID_PROFISSIONAL");
-        result = profissional.getProfessionalById(idProfissional);
-    }
-    
-    if(tipoLogin.equals("S")){
-        idSupervisor = (int) sessao.getAttribute("ID_SUPERVISOR");
-        result = supervisor.getSupervisorById(idSupervisor);
-    }
-    idUsuario = (int) sessao.getAttribute("ID_USUARIO");
-    
-    String nome = result.getString("NOME");
-      
-%>
-
 <!DOCTYPE html>
 <html  >
 <head>
@@ -90,8 +49,8 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <a class="nav-link link text-black show text-primary display-4" href="index.html" data-bs-auto-close="outside" aria-expanded="true">Página Inicial</a>
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="registroProfissional.jsp"><%=nome%></a></div>
+                
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="registroProfissional.jsp">User</a></div>
             </div>
         </div>
     </nav>
@@ -115,8 +74,8 @@
                             <span class="mbr-iconfont mobi-mbri-letter mobi-mbri"></span>
                         </div>
                         <h4 class="card-title mbr-fonts-style mb-2 display-2"><strong>Cadastrar Paciente</strong></h4>
-                        <p class="mbr-text mbr-fonts-style mb-2 display-4">Informações pessoais e Login</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="cadastroUsuario.html" class="text-secondary">Acessar --&gt;</a></h5>
+                        <p class="mbr-text mbr-fonts-style mb-2 display-4">Ficha de Identificação e Login</p>
+                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-secondary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>
@@ -129,7 +88,7 @@
                         <h4 class="card-title mbr-fonts-style align-center mb-2 display-2"><strong>Ficha de Identificação</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">
                             Detalhes do cadastro do Paciente</p>
-                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="fichaIdentificacao.jsp" class="text-secondary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="page1.html" class="text-secondary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>
@@ -149,7 +108,7 @@
                         <h4 class="card-title mbr-fonts-style mb-2 display-2">
                             <strong>Iniciar Atendimento</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">Preencher questionário de saúde e gerar prontuário</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="questionarioSaude.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>
@@ -163,7 +122,7 @@
                             <strong>Gerar Prontuário</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">
                             Gerar prontuário de cliente com base nos atendimentos prestasdos</p>
-                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="prontuario.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>
@@ -206,9 +165,6 @@
     </div>
 </section>
 
-    <%if(tipoLogin.equals("S")){
-    
-   %>      
 <section data-bs-version="5.1" class="contacts1 cid-sKm15zx310" id="contacts1-26">
     <div class="container">
         <div class="mbr-section-head">
@@ -225,14 +181,13 @@
                         <h4 class="card-title mbr-fonts-style mb-2 display-2"><strong>Encaminhamento&nbsp;</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">
                             Encaminhar paciente para outra área/procedimento da Clínica</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="encaminhamento.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>            
         </div>
     </div>
 </section>
-<%    }%>
 
 <section data-bs-version="5.1" class="footer4 cid-sJT1oI5utu" once="footers" id="footer4-x">
 

@@ -10,6 +10,8 @@ package Model;
  * @author paulo
  */
 public class Encaminhamento {  
+
+    
     private String paciente;
     private String supervisor;
     private String profissional;
@@ -18,7 +20,15 @@ public class Encaminhamento {
     private String pos;
     private String projeto;
     private String obs;
+    private String data;
     
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
     public String getPaciente() {
         return paciente;
     }

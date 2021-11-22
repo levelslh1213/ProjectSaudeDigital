@@ -180,7 +180,7 @@ public class ServQuestionario extends HttpServlet {
     public void redirecionar(HttpServletRequest request, HttpServletResponse response){
         
         HttpSession session = request.getSession();
-        session.setAttribute("Questionario", questionario);
+        session.setAttribute("QUESTIONARIO", questionario);
         
         RequestDispatcher rd = request.getRequestDispatcher(destino);
         try {
