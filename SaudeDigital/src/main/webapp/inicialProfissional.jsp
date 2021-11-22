@@ -225,7 +225,7 @@
                         <h4 class="card-title mbr-fonts-style mb-2 display-2"><strong>Encaminhamento&nbsp;</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">
                             Encaminhar paciente para outra área/procedimento da Clínica</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-fonts-style display-7"><a href="encaminhamento.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>            

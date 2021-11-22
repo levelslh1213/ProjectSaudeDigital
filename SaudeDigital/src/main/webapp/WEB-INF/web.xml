@@ -16,6 +16,10 @@
         <servlet-name>ServCadastroPaciente</servlet-name>
         <servlet-class>Control.ServCadastroPaciente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServEncaminhamento</servlet-name>
+        <servlet-class>Control.ServEncaminhamento</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServLogin</servlet-name>
         <url-pattern>/ServLogin</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ServCadastroPaciente</servlet-name>
         <url-pattern>/ServCadastroPaciente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServEncaminhamento</servlet-name>
+        <url-pattern>/ServEncaminhamento</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
