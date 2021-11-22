@@ -200,4 +200,50 @@ public class Paciente extends Pessoa {
             return 0;
         }
     }
+    
+    public int getAddressByPacienteId(int idPaciente) throws ClassNotFoundException{
+        sql = "SELECT ID_ENDERECO FROM PACIENTE WHERE ID_PACIENTE = ?";
+        int retorno = 0;
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idPaciente);
+            result = statement.executeQuery();
+            result.next();
+            retorno = result.getInt("ID_ENDERECO");
+            statement.close();
+            return retorno;
+        } catch (SQLException e) {
+            return 0;
+        }
+    }
+    
+    public String updatePacientelInDB(Paciente paciente, int idPaciente) throws ClassNotFoundException{
+        sql = "UPDATE PACIENTE    SET NOME = ?, DATA_NASCIMENTO = ?, SEXO = ?, RG = ?, CPF = ?, TELEFONE = ?, EMAIL = ?, "
+                + "PESO = ?, ALTURA = ?, COR = ?, ESCOLARIDADE = ?, ESTADO_CIVIL = ?, NATURALIDADE = ?, ESTADO = ? WHERE ID_PACIENTE = ?";
+        try {
+            db = new Controller().connectDB();
+                statement = db.prepareStatement(sql);
+                statement.setString(1, paciente.getNome());
+                statement.setString(2, paciente.getDataNascimento());
+                statement.setString(3, paciente.getSexo());
+                statement.setString(4, paciente.getRg());
+                statement.setString(5, paciente.getCpf());
+                statement.setString(6, paciente.getTelefone());
+                statement.setString(7, paciente.getEmail());
+                statement.setFloat(8, paciente.getPeso());
+                statement.setFloat(9, paciente.getAltura());
+                statement.setString(10, paciente.getCor());
+                statement.setString(11, paciente.getEscolaridade());
+                statement.setString(12, paciente.getEstadoCivil());
+                statement.setString(13, paciente.getNaturalidade());
+                statement.setString(14, paciente.getEstado());
+                statement.setInt(15, idPaciente);
+                statement.executeUpdate();
+                statement.close();
+                return "Sucesso";
+        } catch (SQLException e) {
+            return e.getMessage();
+        }
+    }
 }

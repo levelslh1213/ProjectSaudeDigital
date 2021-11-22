@@ -5,7 +5,7 @@ package Model;
  * @author paulo
  */
 public class QuestionarioSaude{
-    int idPaciente;
+    private String cpf;
     private String queixa;
     private String hitdoenca;
     private String hemorragia;
@@ -30,6 +30,14 @@ public class QuestionarioSaude{
     private String outra_doenca;
     private String fumanete;
     private String frequencia; 
+    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public String getTuberculose() {
         return tuberculose;

@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controles;
+package Control;
 
+import Model.QuestionarioSaude;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 public class ServQuestionario extends HttpServlet {
 
     String destino = "/inicialProfissional.jsp";
-    
+    QuestionarioSaude questionario;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,7 +32,7 @@ public class ServQuestionario extends HttpServlet {
     
     private void getResponse(HttpServletRequest request){
 
-        String cpf = request.getParameter("edtCpf")
+        String cpf = request.getParameter("edtCpf");
         String queixa = request.getParameter("edtQueixa");
         String hitdoenca = request.getParameter("edtHistoria");
         String hemorragia = request.getParameter("cmbHemorragia");
@@ -104,16 +105,16 @@ public class ServQuestionario extends HttpServlet {
               diagdef, tratamento, planotrat, atendimentourg);
     }
     
-    public void parte1(String cpf, String quixa,String hitdoenca,String hemorragia,String alergia,String infeccioso,String cardiovascular,String gastrite,String diabetico,String desmaiou, 
+    public void parte1(String cpf, String queixa,String hitdoenca,String hemorragia,String alergia,String infeccioso,String cardiovascular,String gastrite,String diabetico,String desmaiou, 
               String tratamento_med,String toma_medc,String doente_5,String habitos,String ansie_depre,String tuberculose,String sarampo,String sifilis,String caxumba, 
-              hepatite,String varicela,String aids,String outra_doenca,String fumanete,String histgest,String parto,String prob_parto,String amamentacao, 
+              String hepatite,String varicela,String aids,String outra_doenca,String fumanete,String histgest,String parto,String prob_parto,String amamentacao, 
               String anestesia,String grave_doenca, String vacina, String anos, String aprendizado, String estado_ani, String sono,String conduta_psic, String alimentacao, 
               String sociabilidade,String conduta_pato,String labio,String mucosa,String lingua, String boca,String palato, String garganta, String palato_mole, String alveolar, 
               String gengiva, String glandula, String linfonodos, String atm, String musculo,String oclusao,String pressaomin,String pressaomax,String diagpresuntivo,String examecompl, 
               String diagdef, String tratamento, String planotrat,String atendimentourg){
     
-        questionario = new QuestSaude();
-        questionario.setCpf(cpf)
+        questionario = new QuestionarioSaude();
+        questionario.setCpf(cpf);
         questionario.setQueixa(queixa);
         questionario.setHitdoenca(hitdoenca);
         questionario.setHemorragia(hemorragia);
@@ -195,7 +196,7 @@ public class ServQuestionario extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        receberespostas(request);
+        getResponse(request);
         redirecionar(request, response);
         
         try (PrintWriter out = response.getWriter()) {
