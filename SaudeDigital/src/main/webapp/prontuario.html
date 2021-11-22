@@ -10,7 +10,7 @@
   <meta name="description" content="">
   
   
-  <title>Gerar Encaminhamento</title>
+  <title>Gerar Prontuario</title>
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
@@ -67,7 +67,7 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="ServEncaminhamento" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
+                <form action="ServProntuario" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name">
                     <div class="dragArea row">
                         <div class="col-md-12 col-sm-12 form-group mb-3" data-for="edtSupervisor">
                             <input type="text" name="edtSupervisor" placeholder="Supervisor" class="form-control" value="">
@@ -78,54 +78,16 @@
                         <div class="col-md-12 col-sm-12 form-group mb-3" data-for="edtProfissional">
                             <input type="text" name="edtProfissional" placeholder="Aluno" data-form-field="edtProfissional" class="form-control" value="" id="email-form5-28">
                         </div>
-                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbDisciplina">
-                            <p>Disciplina:</p>
-                            <select name="cmbDisciplina" class="form-control" id="name-form5-14"
-                                data-form-field="cmbDisciplina">
-                                <option value="Disciplina 1">Disciplina 2</option>
-                                <option value="Disciplina 2">Disciplina 2</option>
-                            </select>
+                        <div class="col-12 form-group mb-3" data-for="edtHistoria">
+                            <textarea name="edtHistoria" placeholder="Hostoria da ocorrência"
+                                data-form-field="edtHistoria" class="form-control"
+                                id="textarea-form5-14"></textarea>
                         </div>
-                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbPos">
-                            <p>Graduação:</p>
-                            <select name="cmbPos" class="form-control" id="name-form5-14"
-                                data-form-field="cmbPos">
-                                <option value="Estomatopatologia">Estomatopatologia I, II, III</option>
-                                <option value="Endodontia I">Endodontia I</option>
-                                <option value="Endodontia II">Endodontia II</option>
-                                <option value="Dentistica">Dentística</option>
-                                <option value="Restauradora">Restauradora</option>
-                                <option value="Periodontia I">Periodontia I</option>
-                                <option value="Periodontia II">Periodontia II</option>
-                                <option value="Odontopediatria I">Odontopediatria I</option>
-                                <option value="Odontopediatria II">Odontopediatria II</option>
-                                <option value="Est. Sup. Clínica Integrada I">Est. Sup. Clínica Integrada I</option>
-                                <option value="Est. Sup. Clínica Integrada II">Est. Sup. Clínica Integrada II</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbPos">
-                            <p>Pós Graduação:</p>
-                            <select name="cmbPos" class="form-control" id="name-form5-14"
-                                data-form-field="cmbPos">
-                                <option value="Aperfeiçomento em Cirurgia">Aperfeiçomento em Cirurgia</option>
-                                <option value="Aperfeiçomento em Protese">Aperfeiçomento em Protese</option>
-                                <option value="Implante">Implante</option>
-                            </select>
-                        </div>
-                        <div class="col-md-12 col-sm-12 form-group mb-3" data-for="cmbProjeto">
-                            <p>Projeto de Extensão:</p>
-                            <select name="cmbProjeto" class="form-control" id="name-form5-14"
-                                data-form-field="cmbProjeto">
-                                <option value="Ambulatório de Estomatopatologia">Ambulatório de Estomatopatologia</option>
-                                <option value="PAIPE - Pacientes com necessidades especiais">PAIPE - Pacientes com necessidades especiais</option>
-                                <option value="Plantão Implante">Plantão Implante</option>
-                            </select>
-                        </div>    
-                        <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtData">
-                            <input type="text" name="edtData" placeholder="Data Encaminhamento" data-form-field="edtData" class="form-control" value="" id="email-form5-28">
-                        </div>     
-                        <div class="col-md-12 col-sm-12 form-group mb-3" data-for="edtObs">
-                            <input type="text" name="edtObs" placeholder="Observações" data-form-field="edtObs" class="form-control" value="" id="email-form5-28">
+                                
+                        <div class="col-12 form-group mb-3" data-for="edtObs">
+                            <textarea name="edtObs" placeholder="Observações"
+                                data-form-field="edtObs" class="form-control"
+                                id="textarea-form5-14"></textarea>
                         </div>               
                         <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-secondary display-4">Enviar</button></div>
                     </div>
