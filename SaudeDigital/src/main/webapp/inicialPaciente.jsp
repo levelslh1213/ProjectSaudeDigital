@@ -5,13 +5,25 @@
 --%>
 
 
+<%@page import="Model.Paciente"%>
+<%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    ResultSet result = null;
+    
+    String nome = "";
+    
+    Paciente paciente = new Paciente();
+    
     int idPaciente =0;
     if(request.getAttribute("ID_PACIENTE") != null){
         idPaciente = (int) request.getAttribute("ID_PACIENTE");
+        result = paciente.getPacienteById(idPaciente);
+        nome = result.getString("NOME");
     }
+   
+    
 %>
 
 <!DOCTYPE html>
@@ -76,7 +88,7 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="page1.html"><%=request.getAttribute("ID_PACIENTE")%></a></div>
+                    <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="page1.html"><%=nome%></a></div>
                 </div>
             </div>
         </nav>
@@ -220,7 +232,7 @@
                 <h3 class="mbr-section-title mb-4 mbr-fonts-style display-2">
                     <strong>Visualizar termo de resposabilidade</strong></h3>
                 
-                <div class="mbr-section-btn"><a class="btn btn-secondary display-4" href="https://mobiri.se">Gerar termo</a></div>
+                <div class="mbr-section-btn"><a class="btn btn-secondary display-4" href="termoResponsabilidade.html">Gerar termo</a></div>
             </div>
         </div>
     </div>

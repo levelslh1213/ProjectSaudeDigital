@@ -246,4 +246,18 @@ public class Paciente extends Pessoa {
             return e.getMessage();
         }
     }
+    
+    public ResultSet getPacienteById(int idPaciente) throws ClassNotFoundException{
+        sql = "SELECT * FROM PACIENTE WHERE ID_PACIENTE = ?";
+        try {
+            db = new Controller().connectDB();
+            statement = db.prepareStatement(sql);
+            statement.setInt(1, idPaciente);
+            result = statement.executeQuery();
+            result.next();
+            return result;
+        } catch (SQLException e) {
+            return null;
+        }
+    }
 }

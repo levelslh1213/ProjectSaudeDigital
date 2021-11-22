@@ -149,7 +149,7 @@
                         <h4 class="card-title mbr-fonts-style mb-2 display-2">
                             <strong>Iniciar Atendimento</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">Preencher questionário de saúde e gerar prontuário</p>
-                        <h5 class="link mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-fonts-style display-7"><a href="questionarioSaude.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>

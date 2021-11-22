@@ -4,8 +4,9 @@ package Model;
  *
  * @author paulo
  */
-public class QuestinarioSaude {
-    int idPaciente;
+public class QuestionarioSaude {
+
+    private String cpf;
     private String queixa;
     private String hitdoenca;
     private String hemorragia;
@@ -66,6 +67,295 @@ public class QuestinarioSaude {
     private String tratamento;
     private String planotrat;
     private String atendimentourg;
+    
+    public String getHistgest() {
+        return histgest;
+    }
+
+    public void setHistgest(String histgest) {
+        this.histgest = histgest;
+    }
+
+    public String getParto() {
+        return parto;
+    }
+
+    public void setParto(String parto) {
+        this.parto = parto;
+    }
+
+    public String getProb_parto() {
+        return prob_parto;
+    }
+
+    public void setProb_parto(String prob_parto) {
+        this.prob_parto = prob_parto;
+    }
+
+    public String getAmamentacao() {
+        return amamentacao;
+    }
+
+    public void setAmamentacao(String amamentacao) {
+        this.amamentacao = amamentacao;
+    }
+
+    public String getAnestesia() {
+        return anestesia;
+    }
+
+    public void setAnestesia(String anestesia) {
+        this.anestesia = anestesia;
+    }
+
+    public String getGrave_doenca() {
+        return grave_doenca;
+    }
+
+    public void setGrave_doenca(String grave_doenca) {
+        this.grave_doenca = grave_doenca;
+    }
+
+    public String getVacina() {
+        return vacina;
+    }
+
+    public void setVacina(String vacina) {
+        this.vacina = vacina;
+    }
+
+    public String getAprendizado() {
+        return aprendizado;
+    }
+
+    public void setAprendizado(String aprendizado) {
+        this.aprendizado = aprendizado;
+    }
+
+    public String getEstado_ani() {
+        return estado_ani;
+    }
+
+    public void setEstado_ani(String estado_ani) {
+        this.estado_ani = estado_ani;
+    }
+
+    public String getSono() {
+        return sono;
+    }
+
+    public void setSono(String sono) {
+        this.sono = sono;
+    }
+
+    public String getConduta_psic() {
+        return conduta_psic;
+    }
+
+    public void setConduta_psic(String conduta_psic) {
+        this.conduta_psic = conduta_psic;
+    }
+
+    public String getAlimentacao() {
+        return alimentacao;
+    }
+
+    public void setAlimentacao(String alimentacao) {
+        this.alimentacao = alimentacao;
+    }
+
+    public String getSociabilidade() {
+        return sociabilidade;
+    }
+
+    public void setSociabilidade(String sociabilidade) {
+        this.sociabilidade = sociabilidade;
+    }
+
+    public String getConduta_pato() {
+        return conduta_pato;
+    }
+
+    public void setConduta_pato(String conduta_pato) {
+        this.conduta_pato = conduta_pato;
+    }
+
+    public String getLabio() {
+        return labio;
+    }
+
+    public void setLabio(String labio) {
+        this.labio = labio;
+    }
+
+    public String getMucosa() {
+        return mucosa;
+    }
+
+    public void setMucosa(String mucosa) {
+        this.mucosa = mucosa;
+    }
+
+    public String getLingua() {
+        return lingua;
+    }
+
+    public void setLingua(String lingua) {
+        this.lingua = lingua;
+    }
+
+    public String getBoca() {
+        return boca;
+    }
+
+    public void setBoca(String boca) {
+        this.boca = boca;
+    }
+
+    public String getPalato() {
+        return palato;
+    }
+
+    public void setPalato(String palato) {
+        this.palato = palato;
+    }
+
+    public String getGarganta() {
+        return garganta;
+    }
+
+    public void setGarganta(String garganta) {
+        this.garganta = garganta;
+    }
+
+    public String getPalato_mole() {
+        return palato_mole;
+    }
+
+    public void setPalato_mole(String palato_mole) {
+        this.palato_mole = palato_mole;
+    }
+
+    public String getAlveolar() {
+        return alveolar;
+    }
+
+    public void setAlveolar(String alveolar) {
+        this.alveolar = alveolar;
+    }
+
+    public String getGengiva() {
+        return gengiva;
+    }
+
+    public void setGengiva(String gengiva) {
+        this.gengiva = gengiva;
+    }
+
+    public String getGlandula() {
+        return glandula;
+    }
+
+    public void setGlandula(String glandula) {
+        this.glandula = glandula;
+    }
+
+    public String getLinfonodos() {
+        return linfonodos;
+    }
+
+    public void setLinfonodos(String linfonodos) {
+        this.linfonodos = linfonodos;
+    }
+
+    public String getAtm() {
+        return atm;
+    }
+
+    public void setAtm(String atm) {
+        this.atm = atm;
+    }
+
+    public String getMusculo() {
+        return musculo;
+    }
+
+    public void setMusculo(String musculo) {
+        this.musculo = musculo;
+    }
+
+    public String getOclusao() {
+        return oclusao;
+    }
+
+    public void setOclusao(String oclusao) {
+        this.oclusao = oclusao;
+    }
+
+    public String getPressaomin() {
+        return pressaomin;
+    }
+
+    public void setPressaomin(String pressaomin) {
+        this.pressaomin = pressaomin;
+    }
+
+    public String getPressaomax() {
+        return pressaomax;
+    }
+
+    public void setPressaomax(String pressaomax) {
+        this.pressaomax = pressaomax;
+    }
+
+    public String getDiagpresuntivo() {
+        return diagpresuntivo;
+    }
+
+    public void setDiagpresuntivo(String diagpresuntivo) {
+        this.diagpresuntivo = diagpresuntivo;
+    }
+
+    public String getExamecompl() {
+        return examecompl;
+    }
+
+    public void setExamecompl(String examecompl) {
+        this.examecompl = examecompl;
+    }
+
+    public String getDiagdef() {
+        return diagdef;
+    }
+
+    public void setDiagdef(String diagdef) {
+        this.diagdef = diagdef;
+    }
+
+    public String getTratamento() {
+        return tratamento;
+    }
+
+    public void setTratamento(String tratamento) {
+        this.tratamento = tratamento;
+    }
+
+    public String getPlanotrat() {
+        return planotrat;
+    }
+
+    public void setPlanotrat(String planotrat) {
+        this.planotrat = planotrat;
+    }
+
+    public String getAtendimentourg() {
+        return atendimentourg;
+    }
+
+    public void setAtendimentourg(String atendimentourg) {
+        this.atendimentourg = atendimentourg;
+    }
+    
 
     public String getTuberculose() {
         return tuberculose;
@@ -258,5 +548,11 @@ public class QuestinarioSaude {
     public void setAnsie_depre(String ansie_depre) {
         this.ansie_depre = ansie_depre;
     }
-    
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }    
 }
