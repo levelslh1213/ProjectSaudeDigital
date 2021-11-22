@@ -163,7 +163,7 @@
                             <strong>Gerar Prontuário</strong></h4>
                         <p class="mbr-text mbr-fonts-style mb-2 display-4">
                             Gerar prontuário de cliente com base nos atendimentos prestasdos</p>
-                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="page1.html" class="text-primary">Acessar --&gt;</a></h5>
+                        <h5 class="link mbr-black mbr-fonts-style display-7"><a href="prontuario.html" class="text-primary">Acessar --&gt;</a></h5>
                     </div>
                 </div>
             </div>

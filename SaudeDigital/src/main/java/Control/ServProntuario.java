@@ -5,7 +5,7 @@
  */
 package Control;
 
-import Model.Encaminhamento;
+import Model.Prontuario;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,9 +19,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author paulo
  */
-public class ServEncaminhamento extends HttpServlet {
-
-    Encaminhamento encaminhamento;
+public class ServProntuario extends HttpServlet {
+    
+    Prontuario prontuario;
     String e;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +36,6 @@ public class ServEncaminhamento extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         
-        
         getDataFromRequest(request);
         redirectRequest(request, response, "inicialProfissional.jsp");
         try ( PrintWriter out = response.getWriter()) {
@@ -44,42 +43,34 @@ public class ServEncaminhamento extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ServEncaminhamento</title>");            
+            out.println("<title>Servlet ServProntuario</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ServEncaminhamento at " + this.encaminhamento.getDisciplina() + "</h1>");
+            out.println("<h1>Servlet ServProntuario at " + this.prontuario.getAluno() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
     
     private void getDataFromRequest(HttpServletRequest request){
-        String supervisor = request.getParameter("edtSupervisor"),
+        String  supervisor = request.getParameter("edtSupervisor"),
                 paciente = request.getParameter("edtPaciente"),
                 profissional = request.getParameter("edtProfissional"),
-                disciplina = request.getParameter("cmbDisciplina"),
-                graducao = request.getParameter("cmbGraducao"),
-                pos = request.getParameter("cmbPos"),
-                projeto = request.getParameter("cmbProjeto"),
-                obs = request.getParameter("edtObs");
+                historia = request.getParameter("edtHistoria"),
+                anotacoes = request.getParameter("edObs");
         
-        fillEncaminhamentoInfo(supervisor, paciente, profissional, disciplina, graducao, pos, projeto, obs);       
+        fillProntuarioInfo(supervisor, paciente, profissional, historia, anotacoes);       
         
     }
-    
-    private void fillEncaminhamentoInfo(
-            String supervisor, String paciente, String profissional, String disciplina, 
-            String graducao, String pos, String projeto, String obs){
+    private void fillProntuarioInfo(
+            String supervisor, String paciente, String profissional, String historia, String anotacoes){
         
-        this.encaminhamento = new Encaminhamento();
-        this.encaminhamento.setSupervisor(supervisor);
-        this.encaminhamento.setPaciente(paciente);
-        this.encaminhamento.setProfissional(profissional);
-        this.encaminhamento.setDisciplina(disciplina);
-        this.encaminhamento.setGraduacao(graducao);
-        this.encaminhamento.setPos(pos);
-        this.encaminhamento.setProjeto(projeto);
-        this.encaminhamento.setObs(obs);
+        this.prontuario = new Prontuario();
+        this.prontuario.setProfessor(supervisor);
+        this.prontuario.setPaciente(paciente);
+        this.prontuario.setAluno(profissional);
+        this.prontuario.setHistoria(historia);
+        this.prontuario.setAnotacoes(anotacoes);
     }
     
     private void redirectRequest(HttpServletRequest request, HttpServletResponse response, String destino){
@@ -87,14 +78,14 @@ public class ServEncaminhamento extends HttpServlet {
         
         HttpSession session = request.getSession();
 
-        session.setAttribute("ENCAMINHAMENTO", this.encaminhamento);
+        session.setAttribute("PRONTUARIO", this.prontuario);
         try {
             dispatcher.forward(request, response);
         } catch (Exception e) {
             this.e = e.getMessage();
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

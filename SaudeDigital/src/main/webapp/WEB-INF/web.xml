@@ -20,6 +20,10 @@
         <servlet-name>ServEncaminhamento</servlet-name>
         <servlet-class>Control.ServEncaminhamento</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServProntuario</servlet-name>
+        <servlet-class>Control.ServProntuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServLogin</servlet-name>
         <url-pattern>/ServLogin</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ServEncaminhamento</servlet-name>
         <url-pattern>/ServEncaminhamento</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServProntuario</servlet-name>
+        <url-pattern>/ServProntuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

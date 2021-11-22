@@ -11,8 +11,31 @@
 
 <%
     ResultSet result = null;
+    HttpSession sessao = request.getSession();
     
     String nome = "";
+    String cpf = "";
+    String rg = "";
+    String dataNascimento = "";
+    String sexo = "";
+    String email = "";
+    String telefone = "";
+    float peso = 0;
+    float altura = 0;
+    String cor = "";
+    String estadoCivil = "";
+    String escolaridade = "";
+    String naturalidade = "";
+    String estadoNaturalidade = "";
+    
+    String rua = "";
+    String bairro = "";
+    String complemento = "";
+    String numero = "";
+    String cep = "";
+    String cidade = "";
+    String estado = "";
+    
     
     Paciente paciente = new Paciente();
     
@@ -21,6 +44,19 @@
         idPaciente = (int) request.getAttribute("ID_PACIENTE");
         result = paciente.getPacienteById(idPaciente);
         nome = result.getString("NOME");
+        cpf = result.getString("CPF");
+        rg = result.getString("RG");
+        dataNascimento = result.getString("DATA_NASCIMENTO");
+        sexo = result.getString("SEXO");
+        email = result.getString("EMAIL");
+        telefone = result.getString("TELEFONE");
+        peso = result.getFloat("PESO");
+        altura = result.getFloat("ALTURA");
+        cor  = result.getString("COR");
+        estadoCivil = result.getString("ESTADO_CIVIL");
+        naturalidade = result.getString("NATURALIDADE");
+        estadoNaturalidade = result.getString("ESTADO");     
+        
     }
    
     
@@ -112,16 +148,16 @@
                     <div class="dragArea row">
                         <!--INFORMAÕES DA PESSAO-->
                         <div class="col-12 form-group mb-3" data-for="edtNome">
-                            <input type="text" name="edtNome" placeholder="Nome" data-form-field="edtNome" class="form-control" value="" id="url-form5-14">
+                            <input type="text" name="edtNome" placeholder="Nome" data-form-field="edtNome" class="form-control" value="<%=nome%>" id="url-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtCpf">
-                            <input type="text" name="edtCpf" placeholder="CPF" data-form-field="edtCpf" class="form-control" value="" id="name-form5-14">
+                            <input type="text" name="edtCpf" placeholder="CPF" data-form-field="edtCpf" class="form-control" value="<%=cpf%>" id="name-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtRg">
-                            <input type="text" name="edtRg" placeholder="RG" data-form-field="edtRg" class="form-control" value="" id="email-form5-14">
+                            <input type="text" name="edtRg" placeholder="RG" data-form-field="edtRg" class="form-control" value="<%=rg%>" id="email-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtDataNasc">
-                            <input type="text" name="edtDataNasc" placeholder="Data de Nascimento" data-form-field="edtDataNasc" class="form-control" value="" id="name-form5-14">
+                            <input type="text" name="edtDataNasc" placeholder="Data de Nascimento" data-form-field="edtDataNasc" class="form-control" value="<%=dataNascimento%>" id="name-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbSexo">
                             <select name="cmbSexo" class="form-control" id="name-form5-14" data-form-field="cmbSexo">
@@ -130,18 +166,18 @@
                             </select>
                         </div>
                         <div class="col-12 form-group mb-3" data-for="edtEmail">
-                            <input type="text" name="edtEmail" placeholder="Email" data-form-field="edtEmail" class="form-control" value="" id="url-form5-14">
+                            <input type="text" name="edtEmail" placeholder="Email" data-form-field="edtEmail" class="form-control" value="<%=email%>" id="url-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtTelefone">
-                            <input type="text" name="edtTelefone" placeholder="Telefone" data-form-field="edtTelefone" class="form-control" value="" id="email-form5-14">
+                            <input type="text" name="edtTelefone" placeholder="Telefone" data-form-field="edtTelefone" class="form-control" value="<%=telefone%>" id="email-form5-14">
                         </div>
                         
                         <!--INFORMAÇÕES DO PACIENTE-->
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtPeso">
-                            <input type="text" name="edtPeso" placeholder="Peso" data-form-field="edtPeso" class="form-control" value="" id="name-form5-14">
+                            <input type="text" name="edtPeso" placeholder="Peso" data-form-field="edtPeso" class="form-control" value="<%=peso%>" id="name-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtAltura">
-                            <input type="text" name="edtAltura" placeholder="Altura" data-form-field="edtAltura" class="form-control" value="" id="email-form5-14">
+                            <input type="text" name="edtAltura" placeholder="Altura" data-form-field="edtAltura" class="form-control" value="<%=altura%>" id="email-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="cmbCor">
                             <select name="cmbCor" class="form-control" id="name-form5-14" data-form-field="cmbCor">
@@ -176,10 +212,10 @@
                         </div>
                         
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtNaturalidade">
-                            <input type="text" name="edtNaturalidade" placeholder="Naturalidade" data-form-field="edtNaturalidade" class="form-control" value="" id="name-form5-14">
+                            <input type="text" name="edtNaturalidade" placeholder="Naturalidade" data-form-field="edtNaturalidade" class="form-control" value="<%=naturalidade%>" id="name-form5-14">
                         </div>
                         <div class="col-md-6 col-sm-12 form-group mb-3" data-for="edtEstado">
-                            <input type="text" name="edtEstado" placeholder="Estado" data-form-field="edtEstado" class="form-control" value="" id="name-form5-14">
+                            <input type="text" name="edtEstado" placeholder="Estado" data-form-field="edtEstado" class="form-control" value="<%=estadoNaturalidade%>" id="name-form5-14">
                         </div>
 
                         <br><br><br>
@@ -238,6 +274,10 @@
     </div>
 </section>
 
+<%if(sessao.getAttribute("ENCAMINHAMENTO") != null){
+    
+%>
+
 <section data-bs-version="5.1" class="features9 cid-sKfU6tyIoF" id="features10-f">
     <!---->
     
@@ -267,6 +307,7 @@
         </div>
     </div>
 </section>
+<%}%>
 
 <section data-bs-version="5.1" class="footer4 cid-sJT1oI5utu" once="footers" id="footer4-c">
 
